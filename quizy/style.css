@@ -1,0 +1,29 @@
+.container{
+    max-width: 960px;
+    margin: 0% auto;
+   
+}
+
+
+
+.under{
+    border-bottom: solid #03AB37 ;
+    padding-bottom: 15px;
+    
+}
+
+
+   
+
+
+
+.choice{
+
+    box-shadow:0px 1px 1px#E6E6E6;
+    border-color:#EBEBEB;
+    border-style: solid ;
+    border-width: 1px;
+    padding: 10px; 
+    margin-bottom: 10px; 
+
+}
