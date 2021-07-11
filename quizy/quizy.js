@@ -26,8 +26,8 @@ choice2.addEventListener('click' ,function(){
 
 choice3.addEventListener('click' ,function(){
 
-    choice1.style.background='#FE5129';
-    choice1.style.color='white';
+    choice3.style.background='#FE5129';
+    choice3.style.color='white';
     choice2.style.background='#2A7CFE';
     choice2.style.color='white';
 
