@@ -1,21 +1,14 @@
 .title{
     font-size: 2vw;
-  
 }
 .container{
     max-width: 100%;
     padding: 0% 25% ;
-
 }
-
-
-
 .under{
     border-bottom: solid #03AB37 ;
-    padding-bottom: 1vh;
-    
+    padding-bottom: 1vh;   
 }
-
 .choice{
     cursor: pointer;
     list-style: none;
@@ -25,9 +18,20 @@
     border-width: 1px;
     padding: 10px; 
     margin-bottom: 10px; 
-
 }
-.answer-box{
+.answer_box{
+    display: none;
+    background-color: #F5F5F5;
+    border-color:#EBEBEB;
+    border-style: solid ;
+    border-width: 1px;
+    padding: 10px; 
+    margin-bottom: 10px; 
+    max-width: 100%;
+    margin-left: 40px;
+    padding-bottom: 0px;
+}
+.non_answer_box{
     display: none;
     background-color: #F5F5F5;
     border-color:#EBEBEB;
@@ -40,20 +44,6 @@
     padding-bottom: 0px;
 
 }
-.non_answer-box{
-    display: none;
-    background-color: #F5F5F5;
-    border-color:#EBEBEB;
-    border-style: solid ;
-    border-width: 1px;
-    padding: 10px; 
-    margin-bottom: 10px; 
-    max-width: 100%;
-    margin-left: 40px;
-    padding-bottom: 0px;
-
-}
-
 .answer{
     border-bottom:solid #287DFF;
 }
