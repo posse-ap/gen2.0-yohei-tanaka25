@@ -4,6 +4,7 @@
 .container{
     max-width: 100%;
     padding: 0% 25% ;
+    
 }
 .under{
     border-bottom: solid #03AB37 ;
@@ -19,6 +20,11 @@
     padding: 10px; 
     margin-bottom: 10px; 
 }
+
+.once-point{
+    pointer-events: none;
+}
+
 .answer_box{
     display: none;
     background-color: #F5F5F5;
