@@ -35,27 +35,27 @@ for(let i=0; i<array.length; i++  ){
     +'<h2 class="title"><span class="under">' + [i+1] +'.この地名は</span>なんて読む？</h2>'//問題１を１０個表示
     + '<div class="pic" style="text-align: center">'
     +   '<img src="'+pic[i] +'" alt="問題画像" width="100%"></div>' //各問ごとに画像を表示
-    +     '<ul id="worksFigure_'+i+'" style="display: flex;flex-direction: column">'
-    +        '<li class="choice" id ="choice'+i+'_1" onclick="click_choices('+i+',0,0)" ><b>' + array[i][0] +'</b></li>'//選択肢の表示
-    +        '<li class="choice" id ="choice'+i+'_2" onclick="click_choices('+i+',1,0)"><b>' + array[i][1]+'</b></li>'//選択肢の表示
-    +        '<li class="choice" id ="choice'+i+'_3" onclick="click_choices('+i+',2,0)"><b>' + array[i][2]+'</b></li>'//選択肢の表示
+    +     '<ul id="worksFigure" style="display: flex;flex-direction: column">'
+    +        '<li class="choice" id ="choice'+[i]+'_1" onclick="click_choices('+[i]+',0,0)" ><b>' + array[i][0] +'</b></li>'//選択肢の表示
+    +        '<li class="choice" id ="choice'+[i]+'_2" onclick="click_choices('+[i]+',1,0)"><b>' + array[i][1]+'</b></li>'//選択肢の表示
+    +        '<li class="choice" id ="choice'+[i]+'_3" onclick="click_choices('+[i]+',2,0)"><b>' + array[i][2]+'</b></li>'//選択肢の表示
     +     '</ul>'
     +  '</div> '
     +'</div> '
     //正解ボックス(初めは見えていない)
-    +'<div class="answer_box" id="answer_box'+i+'">'
+    +'<div class="answer_box" id="answer_box'+[i]+'">'
     + '<span class="answer">正解!</span>'
     + '<p>正解は「' + array[i][0] + '」です！</p>'
     +'</div>'
     //不正解ボックス(初めは見えていない)
-    +'<div class="non_answer_box" id= "non_answer_box'+i+'">'
+    +'<div class="non_answer_box" id= "non_answer_box'+[i]+'">'
     + '<span class="non_answer">不正解！</span>'
     + '<p>正解は「' + array[i][0] + '」です！</p>'
     +'</div>'
   //mainをhtml上に表示
   loop.innerHTML  = main;
   // 要素の取得
-  let list_items = document.querySelectorAll("#worksFigure_"+i+" li");
+  let list_items = document.querySelectorAll("#worksFigure li");
   // ランダム関数
   function rand() {
     let choice_order = Math.floor(Math.random() * 3 );
