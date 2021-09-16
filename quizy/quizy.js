@@ -27,44 +27,50 @@ let pic =['https://d1khcm40x1j0f.cloudfront.net/quiz/34d20397a2a506fe2c1ee636dc0
 ];
 
 //問題文・選択肢・解答ボックスをfor文で作成
-let main = ''  ;
-for(let i=0; i<array.length; i++  ){
+let main = '';
+for (let i = 0; i < array.length; i++) {
   main +=
-   //問題内容と選択肢を表示
-     '<div>'
-    +'<h2 class="title"><span class="under">' + [i+1] +'.この地名は</span>なんて読む？</h2>'//問題１を１０個表示
+    //問題内容と選択肢を表示
+    '<div>'
+    + '<h2 class="title"><span class="under">' + [i + 1] + '.この地名は</span>なんて読む？</h2>'//問題１を１０個表示
     + '<div class="pic" style="text-align: center">'
-    +   '<img src="'+pic[i] +'" alt="問題画像" width="100%"></div>' //各問ごとに画像を表示
-    +     '<ul id="worksFigure" style="display: flex;flex-direction: column">'
-    +        '<li class="choice" id ="choice'+[i]+'_1" onclick="click_choices('+[i]+',0,0)" ><b>' + array[i][0] +'</b></li>'//選択肢の表示
-    +        '<li class="choice" id ="choice'+[i]+'_2" onclick="click_choices('+[i]+',1,0)"><b>' + array[i][1]+'</b></li>'//選択肢の表示
-    +        '<li class="choice" id ="choice'+[i]+'_3" onclick="click_choices('+[i]+',2,0)"><b>' + array[i][2]+'</b></li>'//選択肢の表示
-    +     '</ul>'
-    +  '</div> '
-    +'</div> '
+    + '<img src="' + pic[i] + '" alt="問題画像" width="100%"></div>' //各問ごとに画像を表示
+    + `<ul id="worksFigure${i}" style="display: flex;flex-direction: column">`
+    + '<li class="choice" id ="choice' + [i] + '_1" onclick="click_choices(' + [i] + ',0,0)" ><b>' + array[i][0] + '</b></li>'//選択肢の表示
+    + '<li class="choice" id ="choice' + [i] + '_2" onclick="click_choices(' + [i] + ',1,0)"><b>' + array[i][1] + '</b></li>'//選択肢の表示
+    + '<li class="choice" id ="choice' + [i] + '_3" onclick="click_choices(' + [i] + ',2,0)"><b>' + array[i][2] + '</b></li>'//選択肢の表示
+    + '</ul>'
+    + '</div> '
+    + '</div> '
     //正解ボックス(初めは見えていない)
-    +'<div class="answer_box" id="answer_box'+[i]+'">'
+    + '<div class="answer_box" id="answer_box' + [i] + '">'
     + '<span class="answer">正解!</span>'
     + '<p>正解は「' + array[i][0] + '」です！</p>'
-    +'</div>'
+    + '</div>'
     //不正解ボックス(初めは見えていない)
-    +'<div class="non_answer_box" id= "non_answer_box'+[i]+'">'
+    + '<div class="non_answer_box" id= "non_answer_box' + [i] + '">'
     + '<span class="non_answer">不正解！</span>'
     + '<p>正解は「' + array[i][0] + '」です！</p>'
-    +'</div>'
+    + '</div>'
+  };
   //mainをhtml上に表示
-  loop.innerHTML  = main;
+loop.innerHTML = main;
+
+//シャッフルの処理
+for (let i = 0; i < array.length; i++) {
   // 要素の取得
-  let list_items = document.querySelectorAll("#worksFigure li");
+  let list_items = document.querySelectorAll(`#worksFigure${i} li`);
+  // console.log(document.querySelectorAll(`#worksFigure${i} li`))
+
   // ランダム関数
   function rand() {
-    let choice_order = Math.floor(Math.random() * 3 );
-    // console.log(choice_order);
+    let choice_order = Math.floor(Math.random() * 3);
     return choice_order;
   }
   // <li>のorderだけ修正して並び直す
-  Array.from(list_items).forEach( elm =>{ elm.style.order=rand()});
+  list_items.forEach(elm => { elm.style.order = rand();});//Array.fromがなくてもできる
 };
+
 
 //1問目から１０問目までの正誤判定
 function click_choices(quizNum,optionNum,correctNum){
@@ -74,6 +80,8 @@ function click_choices(quizNum,optionNum,correctNum){
   let choice3 = document.getElementById("choice" + quizNum + "_3");
   let answer_box  = document.getElementById("answer_box" + quizNum );
   let non_answer_box  = document.getElementById("non_answer_box" + quizNum );
+
+
   if(optionNum === correctNum){
     //正解を選択した際の処理
     choice1.style.background='#2A7CFE';
@@ -84,7 +92,7 @@ function click_choices(quizNum,optionNum,correctNum){
     answer_box.style="display: block;";
 
   }else if(optionNum === 1){
-    //不正解の際の処理１（上から2つ目の選択肢を選んだ場合）
+    //不正解の際の処理１
     choice2.style.background='#FE5129';
     choice2.style.color='#ffffff';
     choice1.style.background='#2A7CFE';
@@ -95,7 +103,7 @@ function click_choices(quizNum,optionNum,correctNum){
     non_answer_box.style="display: block;";
 
   }else{
-    //不正解の際の処理２（上から3つ目の選択肢を選んだ場合）
+    //不正解の際の処理２
     choice3.style.background='#FE5129';
     choice3.style.color='#ffffff';
     choice1.style.background='#2A7CFE';
