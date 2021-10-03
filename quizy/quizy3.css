@@ -1,0 +1,12 @@
+.selections{
+  cursor: pointer;
+  list-style: none;
+  border: 1px solid #000;
+  margin-bottom: 0.5vh;
+}
+
+.answer_box{
+  list-style: none;
+  display: none;
+ 
+}
