@@ -8,5 +8,9 @@
 .answer_box{
   list-style: none;
   display: none;
- 
+  border: 1px solid #000;
 }
+
+
+
+
