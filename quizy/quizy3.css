@@ -1,8 +1,17 @@
+
+
+.questions{
+  text-align: center;
+  margin: 0 10vw;
+}
+
 .selections{
   cursor: pointer;
   list-style: none;
   border: 1px solid #000;
-  margin-bottom: 0.5vh;
+  margin:0.8vh 20vw;
+  padding:13px;
+  text-align: left;
 }
 
 .answer_box{
@@ -10,7 +19,6 @@
   display: none;
   border: 1px solid #000;
 }
-
 
 
 

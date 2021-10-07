@@ -52,7 +52,7 @@ function createhtml() {
 //問題と選択肢を生成
 function createquestion(questionNum, selectionList, correctNum) {
     console.log(correctNum);
-    let contents = `<div>`
+    let contents = `<div class="questions">`
         + `<h1>${questionNum + 1}.この地名はなんと読む？</h1>`
         + `<img src="${pic[questionNum]}">`
         + `<ul>`
@@ -101,5 +101,5 @@ function click_choices(questionNum, optionNum, correctNum) {
     answer_box.style.display = 'block';
 }
 
-
+//読み込み
 window.onload = createhtml();
