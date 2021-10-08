@@ -1,0 +1,44 @@
+header{
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.main{
+    display: flex;
+    background-color: #f0f0f0;
+}
+
+.left{
+    width: 50%;
+}
+/* ページ左部分の３つのbox */
+.left_box{
+    display: flex;
+    flex-direction: row;
+    margin-left: 5vw;;
+}
+
+.box{
+    width: 30%;
+    margin:20px 20px 0 0;
+    padding:10px 1vw;
+    background-color: #fff;
+    border-radius: 10%;
+}
+
+.right_box{
+    display: flex;
+    flex-direction: row;
+}
+
+.right_contents{
+    margin: 20px 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10%;
+}
+
+
+
+
