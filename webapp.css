@@ -1,44 +1,321 @@
+/* reset css*/
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin:0;
+  padding:0;
+  border:0;
+  outline:0;
+  font-size:100%;
+  vertical-align:baseline;
+  background:transparent;
+}
+
+body {
+  line-height:1;
+}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section { 
+  display:block;
+}
+
+nav ul {
+  list-style:none;
+}
+
+blockquote, q {
+  quotes:none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content:'';
+  content:none;
+}
+
+a {
+  margin:0;
+  padding:0;
+  font-size:100%;
+  vertical-align:baseline;
+  background:transparent;
+}
+
+/* change colours to suit your needs */
+ins {
+  background-color:#ff9;
+  color:#000;
+  text-decoration:none;
+}
+
+/* change colours to suit your needs */
+mark {
+  background-color:#ff9;
+  color:#000; 
+  font-style:italic;
+   font-weight:bold;
+}
+
+del {
+  text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+  border-bottom:1px dotted;
+  cursor:help;
+}
+
+table {
+  border-collapse:collapse;
+  border-spacing:0;
+}
+
+/* change border colour to suit your needs */
+hr {
+  display:block;
+  height:1px;
+  border:0;   
+  border-top:1px solid #cccccc;
+  margin:1em 0;
+  padding:0;
+}
+
+input, select {
+  vertical-align:middle;
+}
+
+
+/* ここまでがreset css */
+
+/* ヘッダー部分 */
 header{
     height: 64px;
     display: flex;
     justify-content: space-between;
+    background-color: #fff;
+
+}
+.header_left{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.posse_logo{
+    width: 150px;
+    height: 100px;
+    vertical-align: middle;
+    padding-left: 10px;
+    margin-top: -20px;
+}
+
+
+.header_left_text{   
+    font-size: small;
+    color: #9BBDD3;
+    margin-top: 25px;
+}
+
+.header_right{
+    margin: 10px 20px;
+}
+
+.header_button{
+    color: #fff;
+    font-weight: normal;background-image: -webkit-linear-gradient(left, #ff3cac 40%, #562b7c 100%);
+    background-image: linear-gradient(90deg, #137DC4 40%, #38C7F9 100%);
+    font-size: 16px;
+    border-radius:40px;
+    border: 1px solid #6091d3;
+    width: 180px;
+    padding: 8px;
+}
+
+/* ここからmain部分 */
+body{
+    background-color: #f0f0f0;
 }
 
 .main{
     display: flex;
-    background-color: #f0f0f0;
+    padding: 0 50px;
+    
 }
 
+
+/* ページ左部分 */
 .left{
     width: 50%;
 }
-/* ページ左部分の３つのbox */
+
 .left_box{
     display: flex;
     flex-direction: row;
-    margin-left: 5vw;;
+    width: 100%;
 }
 
 .box{
-    width: 30%;
-    margin:20px 20px 0 0;
-    padding:10px 1vw;
+    width: 29%;
+    margin:20px 0 0 20px;
+    padding:10px 0 ;
     background-color: #fff;
     border-radius: 10%;
 }
 
+/* todayのbox */
+.today{
+    text-align: center;
+    margin: 10px 0;
+    color: #0E71BC;
+    font-weight: bold;
+
+}
+
+/* monthのbox */
+.month{
+    text-align: center;
+    margin: 10px 0;
+    color: #0E71BC;
+    font-weight: bold;
+
+}
+/* totalのbox */
+.total{
+    text-align: center;
+    margin-top: 10px;
+    color: #0E71BC;
+    font-weight: bold;
+}
+
+/* hourの数字 */
+.hour_number{
+    text-align: center;
+    margin-top: 10px;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.hour{
+    text-align: center;
+    margin-top: 10px;
+    color: #9BBDD3;
+}
+
+.hour_graph{
+    margin:20px 0 0 20px;
+    width:92%;
+    height:70%;
+    border-radius: 10px;
+}
+
+
+
+/* ページ右側部分 */
+.right{
+  width: 50%;
+}
 .right_box{
     display: flex;
     flex-direction: row;
+    width: 100%;
 }
 
 .right_contents{
-    margin: 20px 20px;
-    padding: 20px;
+    width: 40%;
+    margin: 20px 10px;
+    padding: 15px;
     background-color: #fff;
-    border-radius: 10%;
+    border-radius: 10px;
+}
+
+.right_box_titles{
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 20px;
+    margin-top: 2%;
+}
+
+.circle_graph{
+    margin: 10% 0 10% 4%;
+}
+
+.circle{
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    margin: 0 3px 0 9px;
+   
+  }
+/*学習言語の丸の色 */
+#i_color1754EF{
+    background-color: #1754ef;
+}
+#i_color1071BD{
+    background-color: #1071bd;
+}
+#i_color20BEDE{
+    background-color: #20bede;
+}
+#i_color3CCEFE{
+    background-color: #3ccefe;
+}
+#i_colorB29EF3{
+    background-color: #b29ef3;
+}
+#i_color6D46EC{
+    background-color: #6d46ec;
+}
+#i_color4A18EF{
+    background-color: #4a18ef;
+}
+#i_color3105C0{
+    background-color: #3105C0;
+}
+
+/* 学習コンテンツの丸の色 */
+#s_color1754EF{
+    background-color: #1754ef;
+}
+#s_color1071BD{
+    background-color: #1071bd;
+}
+#s_color20BEDE{
+    background-color: #20bede;
+}
+
+
+.study_languages{
+    display: flex;
+    flex-wrap: wrap;
+}
+.study_items{
+    color: #6a6a6a;
+    margin:2vh 0.3vw;
+    font-size: 14px;
+}
+
+.study_contents{
+    color: #6a6a6a;
+    margin:2.5vh 0.3vw;
 }
 
 
 
 
+/* footer */
+.footer_text{
+    text-align: center;
+    margin-top: 5vh;
+}
