@@ -87,7 +87,87 @@
 
         </div>
     </main>
+<!-- モーダル  -->
+<div id="modal_area" class="modal_area">
+    <!-- モーダルのメイン部分 -->
+    <div class="modal_main">
+        <!-- モーダルの左側 -->
+        <div class="modal_left">
+            <div class="modal_day">
+                <h3>学習日</h3>
+                <input type="text" class="modal_day_input">
+            </div>
 
+            <div class="modal_study_contents">
+                <h3>学習コンテンツ（複数選択可）</h3>
+                <div>
+                    <label class="modal_study_contents_check"><input
+                            type="checkbox"><span　class="check_content">N予備校</span></label>
+                    <label class="modal_study_contents_check"><input
+                            type="checkbox"><span　class="check_content">ドットインストール</span></label>
+                    <label class="modal_study_contents_check"><input
+                            type="checkbox"><span　class="check_content">POSSE課題</span></label>
+                </div>
+            </div>
+
+            <div class="modal_study_languages">
+                <h3>学習コンテンツ（複数選択可）</h3>
+                <div>
+                    <label class="modal_study_languages_check"><input
+                            type="checkbox"><span　class="check_language">HTML</span></label>
+                    <label class="modal_study_languages_check"><input
+                            type="checkbox"><span　class="check_language">CSS</span></label>
+                    <label class="modal_study_languages_check"><input
+                            type="checkbox"><span　class="check_language">JavaScrpt</span></label>
+                    <label class="modal_study_languages_check"><input
+                            type="checkbox"><span　class="check_language">PHP</span></label>
+                    <label class="modal_study_languages_check"><input
+                            type="checkbox"><span　class="check_language">Laravel</span></label>
+                    <label class="modal_study_languages_check"><input
+                            type="checkbox"><span　class="check_language">SQL</span></label>
+                    <label class="modal_study_languages_check"><input
+                            type="checkbox"><span　class="check_language">SHELL</span></label>
+                    <label class="modal_study_languages_check"><input
+                            type="checkbox"><span　class="check_language">情報システム基礎知識（その他）</span></label>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- モーダルの右側 -->
+        <div class="modal_right">
+            <div class="modal_hour">
+                <h3>学習時間</h3>
+                <input type="text" 　class="modal_hour_input">
+            </div>
+
+            <div class="modal_tweeter_comnent">
+                <h3>Twitter用コメント</h3>
+                <textarea id="txtbox" class="modal_twitter_textarea" name="tweet_box" onkeyup="GetTweet(value)"
+                    cols="40" rows="8"></textarea>
+            </div>
+
+            <div class="twitter">
+                <label class="twitter_label"><input type="checkbox" id="twitter_check_box"><span
+                        class="twitter_check"></span>
+                    <p>Twitterにシェアする</p>
+                </label>
+            </div>
+            
+        </div>
+        
+    </div>
+
+    <!-- モーダルのフッター -->
+    <div class="modal_footer">
+        <button class="modal_footer_btn" id="tweet" onclick="click_modal()">記録・投稿</button>
+    </div>
+    <div id="close_modal" class="close_modal">
+        ×
+    </div>
+
+
+</div>
     <!-- フッター -->
     <footer　class="footer">
         <h5 class="footer_text">＜　2021年　10月　　＞</h5>
