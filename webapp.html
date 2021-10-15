@@ -8,6 +8,8 @@
     <title>Webアプリケーション</title>
     <link rel="stylesheet" href="webapp.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 
 <body>
@@ -102,12 +104,12 @@
     <div id="modal_area" class="modal_area">
         <div id="close_modal" class="close_modal">×</div>
         <!-- モーダルのメイン部分 -->
-        <div class="modal_main">
+        <div class="modal_main" id="modal_main">
             <!-- モーダルの左側 -->
             <div class="modal_left">
                 <div class="modal_day">
                     <h3>学習日</h3>
-                    <input type="text" class="modal_day_input">
+                    <input type="text" class="modal_day_input" id="sample">
                 </div>
 
                 <div class="modal_study_contents">
@@ -165,12 +167,18 @@
                 </div>
             </div>
         </div>
+        <div class="load" id="load">
+            <img src="./image/loading.png" alt="">
+        </div>
+        <!-- <div class="awesome" id="awesome">
+            <img src="./image/awesome.png" alt="">
+        </div> -->
         <!-- モーダルのフッター -->
         <div class="modal_footer">
-            <button class="modal_footer_btn" id="tweet" onclick="click_modal()">記録・投稿</button>
+            <button class="modal_footer_btn" id="tweet">記録・投稿</button>
         </div>
-        <div class="black-background" id="js-black-bg"></div>
     </div>
+    <div id="overlay" class=""></div>
     <!-- フッター -->
     <footer class="footer">
         <h5 class="footer_text">＜ 2021年 10月 ＞</h5>
