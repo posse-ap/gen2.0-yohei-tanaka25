@@ -109,6 +109,7 @@ header{
 .header_left{
     display: flex;
     flex-direction: row;
+    font-size: 50%;
 }
 
 
@@ -134,7 +135,7 @@ header{
 .header_button{
     color: #fff;
     cursor: pointer;
-    background-image: linear-gradient(90deg, #137DC4 40%, #38C7F9 100%);
+    background-image: linear-gradient(90deg, #137DC4 40%, #38C7F9 100%) ;
     font-size: 16px;
     border-radius:40px;
     border: 1px solid #6091d3;
@@ -149,7 +150,8 @@ body{
 
 .main{
     display: flex;
-    padding: 0 50px;
+    margin: 0 50px;
+    gap: 20px;
     
 }
 
@@ -163,12 +165,13 @@ body{
     display: flex;
     flex-direction: row;
     width: 100%;
+    gap: 20px;
 }
 
 .box{
-    width: 29%;
-    margin:20px 0 0 20px;
-    padding:10px 0 ;
+    width: 33%;
+    margin:20px 0 0 0;
+    padding:10px 10px ;
     background-color: #fff;
     border-radius: 10%;
 }
@@ -179,6 +182,7 @@ body{
     margin: 10px 0;
     color: #0E71BC;
     font-weight: bold;
+    font-size: 80%;
 
 }
 
@@ -188,6 +192,8 @@ body{
     margin: 10px 0;
     color: #0E71BC;
     font-weight: bold;
+    font-size: 80%;
+
 
 }
 /* totalのbox */
@@ -196,13 +202,15 @@ body{
     margin-top: 10px;
     color: #0E71BC;
     font-weight: bold;
+    font-size: 80%;
+
 }
 
 /* hourの数字 */
 .hour_number{
     text-align: center;
     margin-top: 10px;
-    font-size: 40px;
+    font-size: 2.5vw;
     font-weight: bold;
 }
 
@@ -210,12 +218,14 @@ body{
     text-align: center;
     margin-top: 10px;
     color: #9BBDD3;
+    font-size: 80%;
+
 }
 
 .hour_graph{
-    margin:20px 0 0 20px;
-    width:93%;
-    height:70%;
+    margin:20px 0 0 0;
+    width:100%;
+    height:auto;
     border-radius: 10px;
 }
 
@@ -224,30 +234,37 @@ body{
 /* ページ右側部分 */
 .right{
   width: 50%;
+
 }
 .right_box{
     display: flex;
-    flex-direction: row;
     width: 100%;
+    gap: 20px;
 }
 
 .right_contents{
-    width: 40%;
-    margin: 20px 10px;
-    padding: 15px;
+    width: 50%;
+    height: auto;
+    margin: 20px 0 0 0;
+    padding:20px 0;
     background-color: #fff;
     border-radius: 10px;
 }
 
 .right_box_titles{
-    font-size: 20px;
+    font-size: 1.5vw;
     font-weight: bold;
     margin-left: 20px;
     margin-top: 2%;
 }
 
-.circle_graph{
-    margin: 10% 0 10% 4%;
+.circle_graph1{
+    width: 100%;
+    margin: 10% 0 ;
+}
+.circle_graph2{
+    width: 90%;
+    margin: 10% 0 ;
 }
 
 .circle{
@@ -302,7 +319,7 @@ body{
 }
 .study_items{
     color: #6a6a6a;
-    margin:2vh 0.3vw;
+    margin:2vh 0.3vw 0 0;
     font-size: 14px;
 }
 
@@ -358,26 +375,13 @@ body{
 
 .load{
     display: none;
+    
 }
 .show_load{
     display: block;
     text-align: center;
     z-index: 1;
 }
-
-/* .awesome{
-    display: none;
-}
-
-.show_awesome{
-    display: block;
-    text-align: center;
-    transition: 10s;
-    z-index: 2;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-} */
 
 .close_modal{
     display: table;
@@ -510,4 +514,170 @@ color: #0467ad;
 .footer_text{
     text-align: center;
     margin-top: 5vh;
+}
+
+
+/* レスポンシブ対応 */
+
+@media screen and (min-width:481px) {
+	.sp{
+		display: none;
+	}
+}
+@media screen and (max-width:480px) {
+	.pc{
+		display: none;
+	}
+/* メイン部分 */
+    .main{
+        display: block;
+        padding: 0 ;
+        margin: 0 20px;
+    }
+/* 左部分（３つのボックスと棒グラフ） */
+    .left{
+        width: 100%;
+       
+    }
+
+    .left_box{
+        gap: 16px;
+    }
+
+
+    .box{
+        margin: 20px 0 0 0;
+        width: 33%;
+        justify-content: space-between;
+    }
+    .hour_number{
+        font-size: 100%;
+    }
+
+    .hour_graph{
+        margin: 32px 0 0 0;
+        width: 100%;
+    }
+/* 右の部分（円グラフ２つ） */
+    .right{
+        margin: 0;
+        width: 100%;
+    }
+
+
+    .right_box{
+        width: 100%;
+        gap: 16px;
+    }
+
+    .right_contents{
+        width: 50%;
+        margin:16px 0 0 0;
+    }
+
+    .right_box_titles{
+        margin: 0 0 0 1vw;
+        font-size: 3vw;
+    }
+    .circle_graph1{
+        margin:2vh 0 0 0;
+    }
+    .circle_graph2{
+        margin:2vh 0 0 0;
+    }
+
+    .circle{
+        width: 7px;
+        height: 7px;
+    }
+
+    .study_items{
+        font-size: 16%;
+    }
+
+    .study_contents{
+        font-size: 16%;
+    }
+
+    .sp{
+        text-align: center;
+        margin: 20px 0;
+        width: 100%;
+    }
+
+    .modal_area{
+        padding: 0;
+        width: 100%;
+    }
+
+    .modal_main{
+        display: block;
+        padding: 0;
+        margin: 0 20px;
+    }
+    .close_modal{
+        float: right;
+        margin-right: 20px;
+        margin-top: 20px;
+    }
+
+    .modal_left{
+        margin: 0;
+        width: 100%;
+    }
+    .modal_day_input{
+        height: 40px;
+    }
+
+    .title{
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+    .modal_study_contents_check{
+        margin: 0 8px 8px 0;
+        padding:5px 8px;
+    }
+    .check_content{
+        font-size:14px;
+    }
+    .modal_study_languages_check{
+        margin: 0 8px 8px 0;
+        padding:5px 8px;
+    }
+
+    .check_language{
+        font-size: 14px;
+    }
+
+    .modal_right{
+        margin: 0;
+        width: 100%;
+    }
+    .modal_hour_input{
+        margin: 0 0 24px 0;
+    }
+
+    .modal_twitter_textarea{
+        height: 10vh;
+        margin: 0 0 10px 0;
+    }
+    .twitter_check{
+        font-size: 10px;
+        padding: 0;
+    }
+    .modal_footer_btn{
+        width: 100%;
+        padding: 5px 30vw;
+        margin-top: 22px;
+    }
+    .show {
+        opacity: 1; 
+        display: block;
+        position: absolute;
+        margin-top: 64px;
+        top:70%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
 }

@@ -1,41 +1,5 @@
 'use strict';
 
-// function popupImage() {
-//     var popup = document.getElementById('modal_area');
-//     if(!popup) return;
-  
-//     var blackBg = document.getElementById('js-black-bg');
-//     var closeBtn = document.getElementById('close_modal');
-//     var showBtn = document.getElementById('open_modal');
-  
-//     closePopUp(blackBg);
-//     closePopUp(closeBtn);
-//     closePopUp(showBtn);
-//     function closePopUp(elem) {
-//       if(!elem) return;
-//       elem.addEventListener('click', function() {
-//         popup.classList.add('show');
-//       });
-//     }
-//   }
-//   popupImage();
-
-
-var showBtn = document.getElementById('open_modal');
-var closeBtn = document.getElementById('close_modal');
-var popup = document.getElementById('modal_area');
-var overlay = document.getElementById('overlay');
-
-showBtn.addEventListener('click', function(){
-    popup.classList.add('show');
-    overlay.classList.add('overlay');
-
-});
-
-closeBtn.addEventListener('click', function(){
-    popup.classList.remove('show');
-    overlay.classList.remove('overlay');
-});
 
 // カレンダー
 var sample = document.getElementById('sample');
@@ -44,18 +8,52 @@ var fp = flatpickr(sample, {
     dateFormat: "Y-m-d",// フォーマットの変更
 });
 
+var showBtn1 = document.getElementById('open_modal_pc');
+var showBtn2 = document.getElementById('open_modal_sp');
+var closeBtn = document.getElementById('close_modal');
+var popup = document.getElementById('modal_area');
+var overlay = document.getElementById('overlay');
+
+showBtn1.addEventListener('click', function(){
+    popup.classList.add('show');
+    overlay.classList.add('overlay');
+
+});
+showBtn2.addEventListener('click', function(){
+    popup.classList.add('show');
+    overlay.classList.add('overlay');
+
+
+});
+
 // ロード
 var modal_main = document.getElementById('modal_main');
 var load = document.getElementById('load');
-var tweet = document.getElementById('tweet');
-// var awesome = document.getElementById('awesome');
+var tweet1 = document.getElementById('tweet1');//pc版
+var tweet2 = document.getElementById('tweet2');//sp版
 
-tweet.addEventListener('click', function(){
+closeBtn.addEventListener('click', function(){
+    popup.classList.remove('show');
+    overlay.classList.remove('overlay');
+    load.classList.remove('show_load');
+    modal_main.className = 'modal_main';
+    tweet1.classList.remove('in_show');
+    tweet2.classList.remove('in_show');
+});
+
+
+
+tweet1.addEventListener('click', function(){
     modal_main.classList.add('in_show');
     load.classList.add('show_load');
-    tweet.classList.add('in_show');
-    // awesome.classList.add('show_awesome');
+    tweet1.classList.add('in_show');
+});
 
+tweet2.addEventListener('click', function(){
+    modal_main.className = 'in_show'
+    modal_main.classList.add('in_show');
+    load.classList.add('show_load');
+    tweet2.classList.add('in_show');
 });
 
 

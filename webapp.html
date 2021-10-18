@@ -21,7 +21,7 @@
             <span class="header_left_text">4th week</span>
         </div>
         <div class="header_right">
-            <button class="header_button" id="open_modal">記録・投稿</button>
+            <button class="header_button pc" id="open_modal_pc">記録・投稿</button>
         </div>
     </header>
 
@@ -51,8 +51,7 @@
                     </div>
                 </div>
                 <!-- ３box下のgraph部分 -->
-                <img src="https://raw.githubusercontent.com/posse-ap/gen1.0-ph1-posseapp/yuyama/img/leftgraff.png"
-                    alt="棒グラフ" class="hour_graph">
+                <img src="./image/graph1.png" alt="棒グラフ" class="hour_graph">
             </div>
 
             <!-- mainの右側 -->
@@ -61,8 +60,7 @@
                 <div class="right_box">
                     <div class="right_contents">
                         <h3 class="right_box_titles">学習言語</h3>
-                        <img src="https://raw.githubusercontent.com/posse-ap/gen1.0-ph1-posseapp/yuyama/img/gengoguraff.png"
-                            alt="学習言語の円グラフ" class="circle_graph">
+                        <img src="./image/graph2.png" alt="学習言語の円グラフ" class="circle_graph1">
                         <!-- 言語の詳細 -->
                         <div class="study_languages">
                             <section class="study_items"><span class="circle" id="i_color1754EF"></span>JavaScrpt
@@ -82,8 +80,7 @@
                     <!-- 学習コンテンツ right2 -->
                     <div class="right_contents">
                         <h3 class="right_box_titles">学習コンテンツ</h3>
-                        <img src="https://raw.githubusercontent.com/posse-ap/gen1.0-ph1-posseapp/yuyama/img/conteguraff.png"
-                            alt="学習コンテンツの円グラフ" class="circle_graph">
+                        <img src="./image/grapg3.png" alt="学習コンテンツの円グラフ" class="circle_graph2">
                         <!-- 学習コンテンツの円グラフ -->
                         <div>
                             <section class="study_contents"><span class="circle" id="s_color1754EF"></span>ドットインストール
@@ -95,9 +92,14 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
-            
+            <footer class="footer sp">
+                <h5 class="footer_text sp">＜ 2021年 10月 ＞</h5>
+            </footer>
+            <div class="sp">
+                <button class="header_button sp" id="open_modal_sp">記録・投稿</button>
+            </div>
         </div>
     </main>
     <!-- モーダル  -->
@@ -108,12 +110,12 @@
             <!-- モーダルの左側 -->
             <div class="modal_left">
                 <div class="modal_day">
-                    <h3>学習日</h3>
+                    <h3 class="title">学習日</h3>
                     <input type="text" class="modal_day_input" id="sample">
                 </div>
 
                 <div class="modal_study_contents">
-                    <h3>学習コンテンツ（複数選択可）</h3>
+                    <h3 class="title">学習コンテンツ（複数選択可）</h3>
                     <div class="modal_study_contents_all">
                         <label class="modal_study_contents_check"><input type="checkbox" class="Checkbox"><span
                                 class="check_content Checkbox-fontas">N予備校</span></label>
@@ -125,7 +127,7 @@
                 </div>
 
                 <div class="modal_study_languages">
-                    <h3>学習コンテンツ（複数選択可）</h3>
+                    <h3 class="title">学習コンテンツ（複数選択可）</h3>
                     <div class="modal_study_languages_all">
                         <label class="modal_study_languages_check"><input type="checkbox" class="Checkbox"><span
                                 class="check_language Checkbox-fontas">HTML</span></label>
@@ -145,45 +147,45 @@
                                 class="check_language Checkbox-fontas">情報システム基礎知識（その他）</span></label>
                     </div>
                 </div>
-
             </div>
 
             <!-- モーダルの右側 -->
             <div class="modal_right">
                 <div class="modal_hour">
-                    <h3>学習時間</h3>
+                    <h3 class="title">学習時間</h3>
                     <input type="text" class="modal_hour_input">
                 </div>
-                
+
                 <div class="modal_tweeter_comnent">
-                    <h3>Twitter用コメント</h3>
+                    <h3 class="title">Twitter用コメント</h3>
                     <textarea id="txtbox" class="modal_twitter_textarea"></textarea>
                 </div>
-                
+
                 <div class="twitter">
                     <label class="twitter_label"><input type="checkbox" class="Checkbox" id="twitter_check_box"><span
-                        class="twitter_check Checkbox-fontas">Twitterにシェアする</span>
+                            class="twitter_check Checkbox-fontas">Twitterにシェアする</span>
                     </label>
                 </div>
+            </div>
+            <div class="modal_footer sp">
+                <button class="modal_footer_btn" id="tweet2">記録・投稿</button>
             </div>
         </div>
         <div class="load" id="load">
             <img src="./image/loading.png" alt="">
         </div>
-        <!-- <div class="awesome" id="awesome">
-            <img src="./image/awesome.png" alt="">
-        </div> -->
         <!-- モーダルのフッター -->
-        <div class="modal_footer">
-            <button class="modal_footer_btn" id="tweet">記録・投稿</button>
+        <div class="modal_footer pc">
+            <button class="modal_footer_btn" id="tweet1">記録・投稿</button>
         </div>
     </div>
-    <div id="overlay" class=""></div>
     <!-- フッター -->
-    <footer class="footer">
-        <h5 class="footer_text">＜ 2021年 10月 ＞</h5>
-    </footer>
+        <div id="overlay" class=""></div>
+        <footer class="footer pc">
+            <h5 class="footer_text">＜ 2021年 10月 ＞</h5>
+        </footer>
 
     <script src="webapp.js"></script>
 </body>
+
 </html>
