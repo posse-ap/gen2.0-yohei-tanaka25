@@ -99,6 +99,7 @@ input, select {
 /* ここまでがreset css */
 
 /* ヘッダー部分 */
+
 header{
     height: 64px;
     display: flex;
@@ -152,7 +153,6 @@ body{
     display: flex;
     margin: 0 50px;
     gap: 20px;
-    
 }
 
 
@@ -246,7 +246,7 @@ body{
     width: 50%;
     height: auto;
     margin: 20px 0 0 0;
-    padding:20px 0;
+    padding:20px 0 47px 0;
     background-color: #fff;
     border-radius: 10px;
 }
@@ -257,13 +257,15 @@ body{
     margin-left: 20px;
     margin-top: 2%;
 }
-
+.chart{
+    width: 100%;
+}
 .circle_graph1{
     width: 100%;
     margin: 10% 0 ;
 }
 .circle_graph2{
-    width: 90%;
+    width: 100%;
     margin: 10% 0 ;
 }
 
@@ -568,11 +570,12 @@ color: #0467ad;
     .right_box{
         width: 100%;
         gap: 16px;
+        display: flex;
     }
 
     .right_contents{
         width: 50%;
-        margin:16px 0 0 0;
+        margin:5% 0 0 0;
     }
 
     .right_box_titles{

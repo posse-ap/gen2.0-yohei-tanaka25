@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="webapp.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 
@@ -51,7 +52,10 @@
                     </div>
                 </div>
                 <!-- ３box下のgraph部分 -->
-                <img src="./image/graph1.png" alt="棒グラフ" class="hour_graph">
+                <!-- <img src="./image/graph1.png" alt="棒グラフ" class="hour_graph"> -->
+                <div class="test">
+                  <div id="chart_div"  class="hour_graph"></div>
+                </div>
             </div>
 
             <!-- mainの右側 -->
@@ -60,7 +64,8 @@
                 <div class="right_box">
                     <div class="right_contents">
                         <h3 class="right_box_titles">学習言語</h3>
-                        <img src="./image/graph2.png" alt="学習言語の円グラフ" class="circle_graph1">
+                        <!-- <img src="./image/graph2.png" alt="学習言語の円グラフ" class="circle_graph1"> -->
+                        <div id="chart_languages" class="chart circle_graph1"></div>
                         <!-- 言語の詳細 -->
                         <div class="study_languages">
                             <section class="study_items"><span class="circle" id="i_color1754EF"></span>JavaScrpt
@@ -80,7 +85,8 @@
                     <!-- 学習コンテンツ right2 -->
                     <div class="right_contents">
                         <h3 class="right_box_titles">学習コンテンツ</h3>
-                        <img src="./image/grapg3.png" alt="学習コンテンツの円グラフ" class="circle_graph2">
+                        <!-- <img src="./image/grapg3.png" alt="学習コンテンツの円グラフ" class="circle_graph2"> -->
+                        <div id="chart_contents" class="chart circle_graph2"></div>
                         <!-- 学習コンテンツの円グラフ -->
                         <div>
                             <section class="study_contents"><span class="circle" id="s_color1754EF"></span>ドットインストール
@@ -102,7 +108,7 @@
             </div>
         </div>
     </main>
-    <!-- モーダル  -->
+   <!--モーダル -->
     <div id="modal_area" class="modal_area">
         <div id="close_modal" class="close_modal">×</div>
         <!-- モーダルのメイン部分 -->
