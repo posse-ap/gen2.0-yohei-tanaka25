@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -53,7 +54,7 @@
                 </div>
                 <!-- ３box下のgraph部分 -->
                 <!-- <img src="./image/graph1.png" alt="棒グラフ" class="hour_graph"> -->
-                <div class="test">
+                <div class="hour_graph_whole">
                   <div id="chart_div"  class="hour_graph"></div>
                 </div>
             </div>
@@ -123,11 +124,11 @@
                 <div class="modal_study_contents">
                     <h3 class="title">学習コンテンツ（複数選択可）</h3>
                     <div class="modal_study_contents_all">
-                        <label class="modal_study_contents_check"><input type="checkbox" class="Checkbox"><span
+                        <label class="modal_study_contents_check"><input type="checkbox" class="Checkbox" value="クリア"><span
                                 class="check_content Checkbox-fontas">N予備校</span></label>
-                        <label class="modal_study_contents_check"><input type="checkbox" class="Checkbox"><span
+                        <label class="modal_study_contents_check"><input type="checkbox" class="Checkbox" value="クリア"><span
                                 class="check_content Checkbox-fontas">ドットインストール</span></label>
-                        <label class="modal_study_contents_check"><input type="checkbox" class="Checkbox"><span
+                        <label class="modal_study_contents_check"><input type="checkbox" class="Checkbox" value="クリア"><span
                                 class="check_content Checkbox-fontas">POSSE課題</span></label>
                     </div>
                 </div>
@@ -135,21 +136,21 @@
                 <div class="modal_study_languages">
                     <h3 class="title">学習コンテンツ（複数選択可）</h3>
                     <div class="modal_study_languages_all">
-                        <label class="modal_study_languages_check"><input type="checkbox" class="Checkbox"><span
+                        <label class="modal_study_languages_check"><input type="checkbox" class="Checkbox" value="クリア"><span
                                 class="check_language Checkbox-fontas">HTML</span></label>
-                        <label class="modal_study_languages_check"><input type="checkbox" class="Checkbox"><span
+                        <label class="modal_study_languages_check"><input type="checkbox" class="Checkbox" value="クリア"><span
                                 class="check_language Checkbox-fontas">CSS</span></label>
-                        <label class="modal_study_languages_check"><input type="checkbox" class="Checkbox"><span
+                        <label class="modal_study_languages_check"><input type="checkbox" class="Checkbox" value="クリア"><span
                                 class="check_language Checkbox-fontas">JavaScrpt</span></label>
-                        <label class="modal_study_languages_check"><input type="checkbox" class="Checkbox"><span
+                        <label class="modal_study_languages_check"><input type="checkbox" class="Checkbox" value="クリア"><span
                                 class="check_language Checkbox-fontas">PHP</span></label>
-                        <label class="modal_study_languages_check"><input type="checkbox" class="Checkbox"><span
+                        <label class="modal_study_languages_check"><input type="checkbox" class="Checkbox" value="クリア"><span
                                 class="check_language Checkbox-fontas">Laravel</span></label>
-                        <label class="modal_study_languages_check"><input type="checkbox" class="Checkbox"><span
+                        <label class="modal_study_languages_check"><input type="checkbox" class="Checkbox" value="クリア"><span
                                 class="check_language Checkbox-fontas">SQL</span></label>
-                        <label class="modal_study_languages_check"><input type="checkbox" class="Checkbox"><span
+                        <label class="modal_study_languages_check"><input type="checkbox" class="Checkbox" value="クリア"><span
                                 class="check_language Checkbox-fontas">SHELL</span></label>
-                        <label class="modal_study_languages_check"><input type="checkbox" class="Checkbox"><span
+                        <label class="modal_study_languages_check"><input type="checkbox" class="Checkbox" value="クリア"><span
                                 class="check_language Checkbox-fontas">情報システム基礎知識（その他）</span></label>
                     </div>
                 </div>
@@ -159,7 +160,7 @@
             <div class="modal_right">
                 <div class="modal_hour">
                     <h3 class="title">学習時間</h3>
-                    <input type="text" class="modal_hour_input">
+                    <input type="text" class="modal_hour_input" value="クリア">
                 </div>
 
                 <div class="modal_tweeter_comnent">
@@ -168,7 +169,7 @@
                 </div>
 
                 <div class="twitter">
-                    <label class="twitter_label"><input type="checkbox" class="Checkbox" id="twitter_check_box"><span
+                    <label class="twitter_label"><input type="checkbox" class="Checkbox tw" id="twitter_check_box" value="クリア"><span
                             class="twitter_check Checkbox-fontas">Twitterにシェアする</span>
                     </label>
                 </div>
@@ -178,7 +179,8 @@
             </div>
         </div>
         <div class="load" id="load">
-            <img src="./image/loading.png" alt="">
+            <svg  id ="loading" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40"/></svg>
+            <img  id ="loaded" src="./image/awesome.png" alt="" class="awesome" > 
         </div>
         <!-- モーダルのフッター -->
         <div class="modal_footer pc">
