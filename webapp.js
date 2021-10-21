@@ -1,64 +1,54 @@
 'use strict';
 
 // カレンダー
-var sample = document.getElementById('sample');
-var fp = flatpickr(sample, {
+var study_day = document.getElementById('study_day');
+var fp = flatpickr(study_day, {
     enableTime: true,
     dateFormat: "Y-m-d",// フォーマットの変更
 });
 
+
+//ファーストビューの記録・投稿ボタンを押した時の処理
 var showBtn1 = document.getElementById('open_modal_pc');
 var showBtn2 = document.getElementById('open_modal_sp');
 var closeBtn = document.getElementById('close_modal');
 var popup = document.getElementById('modal_area');
 var overlay = document.getElementById('overlay');
-
+//pc版
 showBtn1.addEventListener('click', function () {
     popup.classList.add('show');
     overlay.classList.add('overlay');
-
 });
+//sp版
 showBtn2.addEventListener('click', function () {
     popup.classList.add('show');
     overlay.classList.add('overlay');
-
-
 });
 
-// ローディング
+// モーダル画面内の処理
 var modal_main = document.getElementById('modal_main');
 var load = document.getElementById('load');
 var loading = document.getElementById('loading');
 var loaded = document.getElementById('loaded');
 var tweet1 = document.getElementById('tweet1');//pc版
 var tweet2 = document.getElementById('tweet2');//sp版
+var twitter_check_box = document.getElementById('twitter_check_box')
 var input = document.getElementsByTagName('input');
 
-closeBtn.addEventListener('click', function () {
-    popup.classList.remove('show');
-    overlay.classList.remove('overlay');
-    load.classList.remove('show_load');
-    modal_main.className = 'modal_main';
-    tweet1.classList.remove('in_show');
-    tweet2.classList.remove('in_show');
-    loading.classList.remove('in_show');
-    loaded.style.display ='none';
-    input.value ='unchecked';
-});
-
-
-
+//pc版
 tweet1.addEventListener('click', function () {
     modal_main.classList.add('in_show');
     load.classList.add('show_load');
     tweet1.classList.add('in_show');
-    
+
     setTimeout(() => {
         loading.classList.add('in_show');
         loaded.style.display = 'block';
-    },3300);
+        twitter_checked();
+    }, 3300);
 });
 
+//sp版
 tweet2.addEventListener('click', function () {
     modal_main.className = 'in_show'
     modal_main.classList.add('in_show');
@@ -68,15 +58,32 @@ tweet2.addEventListener('click', function () {
     setTimeout(() => {
         loading.classList.add('in_show');
         loaded.style.display = 'block';
-    },3300);
+        twitter_checked();
+    }, 3300);
+});
+
+//ツイート処理
+function twitter_checked() {
+    let twitter_text = document.getElementById("tweet_box").value;
+    if (twitter_check_box.checked) window.open("https://twitter.com/intent/tweet?text=" + twitter_text);
+};
+
+//クローズ（×）ボタンを押した時の処理
+closeBtn.addEventListener('click', function () {
+    popup.classList.remove('show');
+    overlay.classList.remove('overlay');
+    load.classList.remove('show_load');
+    modal_main.className = 'modal_main';
+    tweet1.classList.remove('in_show');
+    tweet2.classList.remove('in_show');
+    loading.classList.remove('in_show');
+    loaded.style.display = 'none';
+    input.value = 'unchecked';
 });
 
 
 
-
-
 // グラフ
-
 // ライブラリのロード
 // name:visualization(可視化),version:バージョン(1),packages:パッケージ(corechart)
 google.load('visualization', '1', { 'packages': ['corechart'] });
@@ -86,7 +93,6 @@ google.setOnLoadCallback(drawChart);
 
 // グラフの描画   
 function drawChart() {
-
     // 配列からデータの生成
     var data = google.visualization.arrayToDataTable([
         ['day', 'hour', { role: 'style' }],
@@ -120,7 +126,7 @@ function drawChart() {
         [28, 0, 'color: #76A7FA'],
         [29, 0, 'color: #76A7FA'],
         [30, 0, 'color: #76A7FA']
-
+        [31, 0, 'color: #76A7FA']
     ]);
 
     // オプションの設定
@@ -130,16 +136,17 @@ function drawChart() {
         height: '400',
 
         bar: { groupWidth: "60%" },
+        //x軸
         hAxis: {
-            gridlines: { color: 'none'},
+            gridlines: { color: 'none' },
             ticks: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30],
             titleTextStyle: { color: '#137DC4' }
-
         },
+        //y軸
         vAxis: {
             title: '', format: "#.#h",
             minValue: 0,
-            gridlines: { color: 'none'},
+            gridlines: { color: 'none' },
             baselineColor: 'block',
             textPosition: 'out',
             ticks: [2, 4, 6, 8]
@@ -151,7 +158,8 @@ function drawChart() {
 
     // グラフの描画
     chart.draw(data, options);
-}
+};
+
 //学習言語円グラフ
 google.setOnLoadCallback(drawCircle_language);
 
@@ -182,7 +190,7 @@ function drawCircle_language() {
 
     var chart_languages = new google.visualization.PieChart(document.getElementById('chart_languages'));
     chart_languages.draw(data2, options2);
-}
+};
 
 // 学習コンテンツ円グラフ
 google.setOnLoadCallback(drawCircle_content);
@@ -208,11 +216,11 @@ function drawCircle_content() {
     };
     var chart_contents = new google.visualization.PieChart(document.getElementById('chart_contents'));
     chart_contents.draw(data, options);
-}
+};
+
 // グラフの大きさを動的に変更
 window.onresize = function () {
-
     drawChart();
     drawCircle_language();
     drawCircle_content();
-}
+};
