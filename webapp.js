@@ -1,19 +1,13 @@
 'use strict';
 
-// カレンダー
-var study_day = document.getElementById('study_day');
-var fp = flatpickr(study_day, {
-    enableTime: true,
-    dateFormat: "Y-m-d",// フォーマットの変更
-});
-
 
 //ファーストビューの記録・投稿ボタンを押した時の処理
-var showBtn1 = document.getElementById('open_modal_pc');
-var showBtn2 = document.getElementById('open_modal_sp');
+var showBtn1 = document.getElementById('open_modal_pc');//pc版
+var showBtn2 = document.getElementById('open_modal_sp');//sp版
 var closeBtn = document.getElementById('close_modal');
-var popup = document.getElementById('modal_area');
-var overlay = document.getElementById('overlay');
+var popup = document.getElementById('modal_area');//モーダル
+var overlay = document.getElementById('overlay');//モーダル出現時のグレー背景
+
 //pc版
 showBtn1.addEventListener('click', function () {
     popup.classList.add('show');
@@ -26,13 +20,21 @@ showBtn2.addEventListener('click', function () {
 });
 
 // モーダル画面内の処理
-var modal_main = document.getElementById('modal_main');
-var load = document.getElementById('load');
-var loading = document.getElementById('loading');
-var loaded = document.getElementById('loaded');
+
+// カレンダー
+var study_day = document.getElementById('study_day');
+var fp = flatpickr(study_day, {
+    enableTime: true,
+    dateFormat: "Y-m-d",// フォーマットの変更
+});
+
+var modal_main = document.getElementById('modal_main');//モーダルのメイン部分
+var load = document.getElementById('load');//ロード
+var loading = document.getElementById('loading');//ローディング中画像
+var loaded = document.getElementById('loaded');//ロード完了画像
 var tweet1 = document.getElementById('tweet1');//pc版
 var tweet2 = document.getElementById('tweet2');//sp版
-var twitter_check_box = document.getElementById('twitter_check_box')
+var twitter_check_box = document.getElementById('twitter_check_box');//Twitter用コメント
 var input = document.getElementsByTagName('input');
 
 //pc版
@@ -62,16 +64,17 @@ tweet2.addEventListener('click', function () {
     }, 3300);
 });
 
+
 //ツイート処理
 function twitter_checked() {
-    let twitter_text = document.getElementById("tweet_box").value;
-    if (twitter_check_box.checked) window.open("https://twitter.com/intent/tweet?text=" + twitter_text);
+    let twitter_text = document.getElementById("tweet_box").value;//Twitterようコメントの内容
+    if (twitter_check_box.checked) window.open("https://twitter.com/intent/tweet?text=" + twitter_text);//チェックされている場合にTwitterに飛ぶ＋内容も反映
 };
 
-var ElementsCount1 = document.sampleform1.elements.length;
-var ElementsCount2 = document.sampleform2.elements.length;
-var texts    = document.getElementById('tweet_box');
-var study_hour = document.getElementById('study_hour');
+var ElementsCount1 = document.study_contents.elements.length;//モーダルの1つ目のインプットタグ一覧
+var ElementsCount2 = document.study_languages.elements.length;//モーダルの２目のインプットタグ一覧
+var texts = document.getElementById('tweet_box');//Twitterようコメント
+var study_hour = document.getElementById('study_hour');//学習時間
 
 //クローズ（×）ボタンを押した時の処理
 closeBtn.addEventListener('click', function () {
@@ -83,304 +86,154 @@ closeBtn.addEventListener('click', function () {
     tweet2.classList.remove('in_show');
     loading.classList.remove('in_show');
     loaded.style.display = 'none';
-    texts.value ='';
-    study_day.value='';
-    study_hour.value ='';
-    
-    for(let i =0 ; i<ElementsCount1 ; i++ ) {
-        document.sampleform1.elements[i].checked = false; // ON・OFFを切り替え
-     }
-    for(let i =0 ; i<ElementsCount2 ; i++ ) {
-        document.sampleform2.elements[i].checked = false; // ON・OFFを切り替え
-     }
+    texts.value = '';       //記入内容をリセット
+    study_day.value = '';//記入内容をリセット
+    study_hour.value = '';//記入内容をリセット
 
+    for (let i = 0; i < ElementsCount1; i++) {
+        document.study_contents.elements[i].checked = false; // チェック内容をリセット
+    }
+    for (let i = 0; i < ElementsCount2; i++) {
+        document.study_languages.elements[i].checked = false; //チェック内容をリセット
+    }
 });
 
 
-
 // グラフ
-          // ライブラリのロード
-            // name:visualization(可視化),version:バージョン(1),packages:パッケージ(corechart)
-            google.load('visualization', '1', { 'packages': ['corechart'] });
+// ライブラリのロード
+// name:visualization(可視化),version:バージョン(1),packages:パッケージ(corechart)
+google.load('visualization', '1', { 'packages': ['corechart'] });
 
-            // グラフを描画する為のコールバック関数を指定
-            google.setOnLoadCallback(drawChart);
+// グラフを描画する為のコールバック関数を指定
+google.setOnLoadCallback(drawChart);
 
-            // グラフの描画   
-            function drawChart() {
+// グラフの描画   
+function drawChart() {
+    // 配列からデータの生成
+    var data = google.visualization.arrayToDataTable([
+        ['day', 'hour', { role: 'style' }],
+        [1, 3, 'color: #76A7FA'],
+        [2, 4, 'color: #76A7FA'],
+        [3, 5, 'color: #76A7FA'],
+        [4, 3, 'color: #76A7FA'],
+        [5, 2, 'color: #76A7FA'],
+        [6, 1, 'color: #76A7FA'],
+        [7, 0, 'color: #76A7FA'],
+        [8, 2, 'color: #76A7FA'],
+        [9, 2, 'color: #76A7FA'],
+        [10, 8, 'color: #76A7FA'],
+        [11, 3, 'color: #76A7FA'],
+        [12, 2, 'color: #76A7FA'],
+        [13, 2, 'color: #76A7FA'],
+        [14, 1, 'color: #76A7FA'],
+        [15, 5, 'color: #76A7FA'],
+        [16, 0, 'color: #76A7FA'],
+        [17, 0, 'color: #76A7FA'],
+        [18, 0, 'color: #76A7FA'],
+        [19, 0, 'color: #76A7FA'],
+        [20, 0, 'color: #76A7FA'],
+        [21, 0, 'color: #76A7FA'],
+        [22, 0, 'color: #76A7FA'],
+        [23, 0, 'color: #76A7FA'],
+        [24, 0, 'color: #76A7FA'],
+        [25, 0, 'color: #76A7FA'],
+        [26, 0, 'color: #76A7FA'],
+        [27, 0, 'color: #76A7FA'],
+        [28, 0, 'color: #76A7FA'],
+        [29, 0, 'color: #76A7FA'],
+        [30, 0, 'color: #76A7FA']
+    ]);
 
-                // 配列からデータの生成
-                var data = google.visualization.arrayToDataTable([
-                    ['day', 'hour', { role: 'style' }],
-                    [1, 3 ,'color: #76A7FA' ],
-                    [2, 4 ,'color: #76A7FA' ],
-                    [3, 5 ,'color: #76A7FA' ],
-                    [4, 3 ,'color: #76A7FA' ],
-                    [5, 2 ,'color: #76A7FA' ],
-                    [6, 1 ,'color: #76A7FA' ],
-                    [7, 0 ,'color: #76A7FA' ],
-                    [8, 2 ,'color: #76A7FA' ],
-                    [9, 2 ,'color: #76A7FA' ],
-                    [10, 8,'color: #76A7FA' ],
-                    [11, 3,'color: #76A7FA' ],
-                    [12, 2,'color: #76A7FA' ],
-                    [13, 2,'color: #76A7FA' ],
-                    [14, 1,'color: #76A7FA' ],
-                    [15, 5,'color: #76A7FA' ],
-                    [16, 0,'color: #76A7FA' ],
-                    [17, 0,'color: #76A7FA' ],
-                    [18, 0,'color: #76A7FA' ],
-                    [19, 0,'color: #76A7FA' ],
-                    [20, 0,'color: #76A7FA' ],
-                    [21, 0,'color: #76A7FA' ],
-                    [22, 0,'color: #76A7FA' ],
-                    [23, 0,'color: #76A7FA' ],
-                    [24, 0,'color: #76A7FA' ],
-                    [25, 0,'color: #76A7FA' ],
-                    [26, 0,'color: #76A7FA' ],
-                    [27, 0,'color: #76A7FA' ],
-                    [28, 0,'color: #76A7FA' ],
-                    [29, 0,'color: #76A7FA' ],
-                    [30, 0,'color: #76A7FA' ]
-                ]);
+    // オプションの設定
+    var options = {
+        legend: { position: 'none' },
+        width: "100%",
+        height: '400',
 
-                // オプションの設定
-                var options = {
-                            legend: { position: 'none' },
-                            width: "100%",
-                            height: '400',
-                    
-                            bar: { groupWidth: "60%" },
-                            //x軸
-                            hAxis: {
-                                gridlines: { color: 'none' },
-                                ticks: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30],
-                                titleTextStyle: { color: '#137DC4' }
-                            },
-                            //y軸
-                            vAxis: {
-                                title: '', format: "#.#h",
-                                minValue: 0,
-                                gridlines: { color: 'none' },
-                                baselineColor: 'block',
-                                textPosition: 'out',
-                                ticks: [2, 4, 6, 8]
-                            },
-                        };
+        bar: { groupWidth: "60%" },
+        //x軸
+        hAxis: {
+            gridlines: { color: 'none' },
+            ticks: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30],
+            titleTextStyle: { color: '#137DC4' }
+        },
+        //y軸
+        vAxis: {
+            title: '', format: "#.#h",
+            minValue: 0,
+            gridlines: { color: 'none' },
+            baselineColor: 'block',
+            textPosition: 'out',
+            ticks: [2, 4, 6, 8]
+        },
+    };
+    // 指定されたIDの要素に棒グラフを作成
+    var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+    // グラフの描画
+    chart.draw(data, options);
+};
 
-                // 指定されたIDの要素に棒グラフを作成
-                var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+//学習言語円グラフ
+google.setOnLoadCallback(drawCircle_language);
 
-                // グラフの描画
-                chart.draw(data, options);
-            }
-           //学習言語円グラフ
-            google.setOnLoadCallback(drawCircle_language);
+function drawCircle_language() {
+    var data2 = new google.visualization.arrayToDataTable([
+        ['language', 'hour'],
+        ['javascript', 5.9],
+        ['css', 11.8],
+        ['php', 12],
+        ['html', 30],
+        ['laravel', 5],
+        ['sql', 20],
+        ['shell', 20],
+        ['others', 10]
+    ]);
 
-            function drawCircle_language() {
-                var data2 = new google.visualization.arrayToDataTable([
-                    ['language', 'hour'],
-                    ['javascript', 5.9],
-                    ['css', 11.8],
-                    ['php', 12],
-                    ['html', 30],
-                    ['laravel', 5],
-                    ['sql', 20],
-                    ['shell', 20],
-                    ['others', 10]
-                ]);
+    var formatter2 = new google.visualization.NumberFormat({ pattern: '#,###.0' + '時間' });
+    formatter2.format(data2, 1);
 
-                var formatter2 = new google.visualization.NumberFormat({ pattern: '#,###.0' + '時間' });
-                formatter2.format(data2, 1);
+    var options2 = {
+        pieHole: 0.5,
+        legend: 'none',
+        colors: ['#2A54EF', '#1B71BD', '#21BDDE', '#3DCEFD', '#B39EF3', '#6D47EC', '#4A18EF', '#3107BF'],
+        width: '100%',
+        height: '254',
+        chartArea: { width: '100%', height: '100%', top: 0 },
+    };
 
-                var options2 = {
-                    pieHole: 0.5,
-                    legend: 'none',
-                    colors: ['#2A54EF', '#1B71BD', '#21BDDE', '#3DCEFD', '#B39EF3', '#6D47EC', '#4A18EF', '#3107BF'],
-                    width: '100%',
-                    height: '254',
-                    chartArea: { width: '100%', height: '100%', top: 0 },
-                };
+    var chart_languages = new google.visualization.PieChart(document.getElementById('chart_languages'));
+    chart_languages.draw(data2, options2);
+};
 
-                var chart_languages = new google.visualization.PieChart(document.getElementById('chart_languages'));
-                chart_languages.draw(data2, options2);
-            }
+// 学習コンテンツ円グラフ
+google.setOnLoadCallback(drawCircle_content);
 
-            // 学習コンテンツ円グラフ
-            google.setOnLoadCallback(drawCircle_content);
+function drawCircle_content() {
+    var data = new google.visualization.arrayToDataTable([
+        ['language', 'hour'],
+        ['ドットインストール', 19.9],
+        ['N予備校', 11.8],
+        ['posse課題', 12],
+    ]);
 
-            function drawCircle_content() {
-                var data = new google.visualization.arrayToDataTable([
-                    ['language', 'hour'],
-                    ['ドットインストール', 19.9],
-                    ['N予備校', 11.8],
-                    ['posse課題', 12],
-                ]);
+    var formatter = new google.visualization.NumberFormat({ pattern: '#,###.0' + '時間' });
+    formatter.format(data, 1);
 
-                var formatter= new google.visualization.NumberFormat({ pattern: '#,###.0' + '時間' });
-                formatter.format(data, 1);
+    var options = {
+        pieHole: 0.5,
+        legend: 'none',
+        colors: ['#2A54EF', '#1B71BD', '#21BDDE'],
+        width: '100%',
+        height: '254',
+        chartArea: { width: '100%', height: '100%', top: 0 },
+    };
+    var chart_contents = new google.visualization.PieChart(document.getElementById('chart_contents'));
+    chart_contents.draw(data, options);
+};
 
-                var options = {
-                    pieHole: 0.5,
-                    legend: 'none',
-                    colors: ['#2A54EF', '#1B71BD', '#21BDDE'],
-                    width: '100%',
-                    height: '254',
-                    chartArea: { width: '100%', height: '100%', top: 0 },
-                };
-                var chart_contents = new google.visualization.PieChart(document.getElementById('chart_contents'));
-                chart_contents.draw(data, options);
-            }
 // グラフの大きさを動的に変更
-            window.onresize = function(){
-    
-                drawChart();
-                drawCircle_language();
-                drawCircle_content();
-              };
-
-
-
-//この下のコメントアウト部分は謎のエラーがてたやつ（未解決）
-
-// // グラフ
-// // ライブラリのロード
-// // name:visualization(可視化),version:バージョン(1),packages:パッケージ(corechart)
-// google.load('visualization', '1', { 'packages': ['corechart'] });
-
-// // グラフを描画する為のコールバック関数を指定
-// google.setOnLoadCallback(drawChart);
-
-// // グラフの描画   
-// function drawChart() {
-//     // 配列からデータの生成
-//     var data = new google.visualization.arrayToDataTable([
-//         ['day', 'hour', { role: 'style' }],
-//         [1, 3, 'color: #76A7FA'],
-//         [2, 4, 'color: #76A7FA'],
-//         [3, 5, 'color: #76A7FA'],
-//         [4, 3, 'color: #76A7FA'],
-//         [5, 2, 'color: #76A7FA'],
-//         [6, 1, 'color: #76A7FA'],
-//         [7, 0, 'color: #76A7FA'],
-//         [8, 2, 'color: #76A7FA'],
-//         [9, 2, 'color: #76A7FA'],
-//         [10, 8, 'color: #76A7FA'],
-//         [11, 3, 'color: #76A7FA'],
-//         [12, 2, 'color: #76A7FA'],
-//         [13, 2, 'color: #76A7FA'],
-//         [14, 1, 'color: #76A7FA'],
-//         [15, 5, 'color: #76A7FA'],
-//         [16, 0, 'color: #76A7FA'],
-//         [17, 0, 'color: #76A7FA'],
-//         [18, 0, 'color: #76A7FA'],
-//         [19, 0, 'color: #76A7FA'],
-//         [20, 0, 'color: #76A7FA'],
-//         [21, 0, 'color: #76A7FA'],
-//         [22, 0, 'color: #76A7FA'],
-//         [23, 0, 'color: #76A7FA'],
-//         [24, 0, 'color: #76A7FA'],
-//         [25, 0, 'color: #76A7FA'],
-//         [26, 0, 'color: #76A7FA'],
-//         [27, 0, 'color: #76A7FA'],
-//         [28, 0, 'color: #76A7FA'],
-//         [29, 0, 'color: #76A7FA'],
-//         [30, 0, 'color: #76A7FA']
-//         [31, 0, 'color: #76A7FA']
-//     ]);
-
-//     // オプションの設定
-//     var options = {
-//         legend: { position: 'none' },
-//         width: "100%",
-//         height: '400',
-
-//         bar: { groupWidth: "60%" },
-//         //x軸
-//         hAxis: {
-//             gridlines: { color: 'none' },
-//             ticks: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30],
-//             titleTextStyle: { color: '#137DC4' }
-//         },
-//         //y軸
-//         vAxis: {
-//             title: '', format: "#.#h",
-//             minValue: 0,
-//             gridlines: { color: 'none' },
-//             baselineColor: 'block',
-//             textPosition: 'out',
-//             ticks: [2, 4, 6, 8]
-//         },
-//     };
-
-//     // 指定されたIDの要素に棒グラフを作成
-//     var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-
-//     // グラフの描画
-//     chart.draw(data, options);
-// };
-
-// //学習言語円グラフ
-// google.setOnLoadCallback(drawCircle_language);
-
-// function drawCircle_language() {
-//     var data2 = new google.visualization.arrayToDataTable([
-//         ['language', 'hour'],
-//         ['javascript', 5.9],
-//         ['css', 11.8],
-//         ['php', 12],
-//         ['html', 30],
-//         ['laravel', 5],
-//         ['sql', 20],
-//         ['shell', 20],
-//         ['others', 10]
-//     ]);
-
-//     var formatter2 = new google.visualization.NumberFormat({ pattern: '#,###.0' + '時間' });
-//     formatter2.format(data2, 1);
-
-//     var options2 = {
-//         pieHole: 0.5,
-//         legend: 'none',
-//         colors: ['#2A54EF', '#1B71BD', '#21BDDE', '#3DCEFD', '#B39EF3', '#6D47EC', '#4A18EF', '#3107BF'],
-//         width: '100%',
-//         height: '254',
-//         chartArea: { width: '100%', height: '100%', top: 0 },
-//     };
-
-//     var chart_languages = new google.visualization.PieChart(document.getElementById('chart_languages'));
-//     chart_languages.draw(data2, options2);
-// };
-
-// // 学習コンテンツ円グラフ
-// google.setOnLoadCallback(drawCircle_content);
-
-// function drawCircle_content() {
-//     var data = new google.visualization.arrayToDataTable([
-//         ['language', 'hour'],
-//         ['ドットインストール', 19.9],
-//         ['N予備校', 11.8],
-//         ['posse課題', 12],
-//     ]);
-
-//     var formatter = new google.visualization.NumberFormat({ pattern: '#,###.0' + '時間' });
-//     formatter.format(data, 1);
-
-//     var options = {
-//         pieHole: 0.5,
-//         legend: 'none',
-//         colors: ['#2A54EF', '#1B71BD', '#21BDDE'],
-//         width: '100%',
-//         height: '254',
-//         chartArea: { width: '100%', height: '100%', top: 0 },
-//     };
-//     var chart_contents = new google.visualization.PieChart(document.getElementById('chart_contents'));
-//     chart_contents.draw(data, options);
-// };
-
-// // グラフの大きさを動的に変更
-// window.onresize = function (){
-//     drawChart();
-//     drawCircle_language();
-//     drawCircle_content();
-// };
+window.onresize = function () {
+    drawChart();
+    drawCircle_language();
+    drawCircle_content();
+};
