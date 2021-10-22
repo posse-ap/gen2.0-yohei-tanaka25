@@ -521,10 +521,7 @@ body{
     content: '\f058';
     color: #ccc;
 }
-/* .tw + .Checkbox-fontas:before {
-    font-size: 2vw;
-    color: #1071bd;
-} */
+
 .Checkbox:checked + .Checkbox-fontas:before {
     color: #0467ad;
 }

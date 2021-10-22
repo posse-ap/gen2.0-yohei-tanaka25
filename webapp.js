@@ -8,20 +8,21 @@ var closeBtn = document.getElementById('close_modal');
 var popup = document.getElementById('modal_area');//モーダル
 var overlay = document.getElementById('overlay');//モーダル出現時のグレー背景
 
-//pc版
+//pc版(ファーストビューにある記録投稿ボタンをクリック時にモーダルとその後ろのグレー背景を表示)
 showBtn1.addEventListener('click', function () {
     popup.classList.add('show');
     overlay.classList.add('overlay');
 });
-//sp版
+//sp版(ファーストビューにある記録投稿ボタンをクリック時にモーダルとその後ろのグレー背景を表示)
 showBtn2.addEventListener('click', function () {
     popup.classList.add('show');
     overlay.classList.add('overlay');
 });
 
+
 // モーダル画面内の処理
 
-// カレンダー
+// カレンダー（学習日のインプットタグの中にflatpickerでカレンダーを読み込む）
 var study_day = document.getElementById('study_day');
 var fp = flatpickr(study_day, {
     enableTime: true,
@@ -37,7 +38,7 @@ var tweet2 = document.getElementById('tweet2');//sp版
 var twitter_check_box = document.getElementById('twitter_check_box');//Twitter用コメント
 var input = document.getElementsByTagName('input');
 
-//pc版
+//pc版（モーダルないの記録投稿ボタンをクリック時にローディング画面を表示するとともに約3秒ごにロード完了画面、twitter_checked関数を発火させる）
 tweet1.addEventListener('click', function () {
     modal_main.classList.add('in_show');
     load.classList.add('show_load');
@@ -50,7 +51,7 @@ tweet1.addEventListener('click', function () {
     }, 3300);
 });
 
-//sp版
+//sp版（モーダルないの記録投稿ボタンをクリック時にローディング画面を表示するとともに約3秒ごにロード完了画面、twitter_checked関数を発火させる）
 tweet2.addEventListener('click', function () {
     modal_main.className = 'in_show'
     modal_main.classList.add('in_show');
@@ -66,6 +67,7 @@ tweet2.addEventListener('click', function () {
 
 
 //ツイート処理
+//ツイート投稿内容に入力されたテキストを取得するとともに、ツイートのチェックボックスがチェックされている場合にはその内容が反映されたtwitter画面へと飛ぶ
 function twitter_checked() {
     let twitter_text = document.getElementById("tweet_box").value;//Twitterようコメントの内容
     if (twitter_check_box.checked) window.open("https://twitter.com/intent/tweet?text=" + twitter_text);//チェックされている場合にTwitterに飛ぶ＋内容も反映
@@ -149,7 +151,6 @@ function drawChart() {
         legend: { position: 'none' },
         width: "100%",
         height: '400',
-
         bar: { groupWidth: "60%" },
         //x軸
         hAxis: {
@@ -188,7 +189,7 @@ function drawCircle_language() {
         ['shell', 20],
         ['others', 10]
     ]);
-
+    
     var formatter2 = new google.visualization.NumberFormat({ pattern: '#,###.0' + '時間' });
     formatter2.format(data2, 1);
 
