@@ -68,6 +68,11 @@ function twitter_checked() {
     if (twitter_check_box.checked) window.open("https://twitter.com/intent/tweet?text=" + twitter_text);
 };
 
+var ElementsCount1 = document.sampleform1.elements.length;
+var ElementsCount2 = document.sampleform2.elements.length;
+var texts    = document.getElementById('tweet_box');
+var study_hour = document.getElementById('study_hour');
+
 //クローズ（×）ボタンを押した時の処理
 closeBtn.addEventListener('click', function () {
     popup.classList.remove('show');
@@ -78,13 +83,22 @@ closeBtn.addEventListener('click', function () {
     tweet2.classList.remove('in_show');
     loading.classList.remove('in_show');
     loaded.style.display = 'none';
-    input.value = 'unchecked';
+    texts.value ='';
+    study_day.value='';
+    study_hour.value ='';
+    
+    for(let i =0 ; i<ElementsCount1 ; i++ ) {
+        document.sampleform1.elements[i].checked = false; // ON・OFFを切り替え
+     }
+    for(let i =0 ; i<ElementsCount2 ; i++ ) {
+        document.sampleform2.elements[i].checked = false; // ON・OFFを切り替え
+     }
+
 });
 
 
 
 // グラフ
-
           // ライブラリのロード
             // name:visualization(可視化),version:バージョン(1),packages:パッケージ(corechart)
             google.load('visualization', '1', { 'packages': ['corechart'] });

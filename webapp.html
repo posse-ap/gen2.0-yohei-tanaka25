@@ -124,19 +124,19 @@
 
                 <div class="modal_study_contents">
                     <h3 class="title">学習コンテンツ（複数選択可）</h3>
-                    <div class="modal_study_contents_all">
+                    <form class="modal_study_contents_all" name="sampleform1">
                         <label class="modal_study_contents_check"><input type="checkbox" class="Checkbox" value="クリア"><span
                                 class="check_content Checkbox-fontas">N予備校</span></label>
                         <label class="modal_study_contents_check"><input type="checkbox" class="Checkbox" value="クリア"><span
                                 class="check_content Checkbox-fontas">ドットインストール</span></label>
                         <label class="modal_study_contents_check"><input type="checkbox" class="Checkbox" value="クリア"><span
                                 class="check_content Checkbox-fontas">POSSE課題</span></label>
-                    </div>
+                    </form>
                 </div>
 
                 <div class="modal_study_languages">
                     <h3 class="title">学習コンテンツ（複数選択可）</h3>
-                    <div class="modal_study_languages_all">
+                    <form class="modal_study_languages_all" name="sampleform2">
                         <label class="modal_study_languages_check"><input type="checkbox" class="Checkbox" ><span
                                 class="check_language Checkbox-fontas">HTML</span></label>
                         <label class="modal_study_languages_check"><input type="checkbox" class="Checkbox" ><span
@@ -153,7 +153,7 @@
                                 class="check_language Checkbox-fontas">SHELL</span></label>
                         <label class="modal_study_languages_check"><input type="checkbox" class="Checkbox" ><span
                                 class="check_language Checkbox-fontas">情報システム基礎知識（その他）</span></label>
-                    </div>
+                    </form>
                 </div>
             </div>
 
@@ -161,12 +161,12 @@
             <div class="modal_right">
                 <div class="modal_hour">
                     <h3 class="title">学習時間</h3>
-                    <input type="text" class="modal_hour_input" >
+                    <input type="text" class="modal_hour_input" id="study_hour" >
                 </div>
 
                 <div class="modal_tweeter_comnent">
                     <h3 class="title">Twitter用コメント</h3>
-                    <textarea id="tweet_box" class="modal_twitter_textarea"></textarea>
+                    <textarea id="tweet_box" class="modal_twitter_textarea" name="texts"></textarea>
                 </div>
 
                 <div class="twitter">
