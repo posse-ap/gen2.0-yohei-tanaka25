@@ -402,6 +402,7 @@ body{
     font-size: 30px;
     border-radius: 50%;
     margin-left: 850px;
+    cursor: pointer;
 }
 /* モーダル左部分 */
 .modal_left{
@@ -429,6 +430,7 @@ body{
 }
 
 .modal_study_contents_check{
+    cursor: pointer;
     border-radius: 20px;
     padding: 10px 12px;
     margin: 10px 10px 10px 0;
@@ -445,15 +447,16 @@ body{
 }
 
 .modal_study_languages_check{
+    cursor: pointer;
     border-radius: 20px;
     padding: 10px 10px 10px 0;
     margin:5px;
     background-color: #f4f5f9;
 }
 
-.checked{
+/* .checked{
     background-color: #aecffa;
-}
+} */
 
 /* モーダル右部分 */
 .modal_right{
@@ -525,6 +528,8 @@ body{
 .Checkbox:checked + .Checkbox-fontas:before {
     color: #0467ad;
 }
+
+
 
 
 /* footer */

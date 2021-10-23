@@ -29,6 +29,14 @@ var fp = flatpickr(study_day, {
     dateFormat: "Y-m-d",// フォーマットの変更
 });
 
+//チェック時に背景色を変更
+function chebg(chkID){
+    var  Myid=document.getElementById(chkID);
+    if(Myid.checked){
+    Myid.parentNode.style.backgroundColor = '#C6E5FF';
+}else{Myid.parentNode.style.backgroundColor = '#f4f5f9';}
+    };
+
 var modal_main = document.getElementById('modal_main');//モーダルのメイン部分
 var load = document.getElementById('load');//ロード
 var loading = document.getElementById('loading');//ローディング中画像
@@ -75,8 +83,9 @@ function twitter_checked() {
 
 var ElementsCount1 = document.study_contents.elements.length;//モーダルの1つ目のインプットタグ一覧
 var ElementsCount2 = document.study_languages.elements.length;//モーダルの２目のインプットタグ一覧
-var texts = document.getElementById('tweet_box');//Twitterようコメント
+var texts = document.getElementById('tweet_box');//Twitter用コメント
 var study_hour = document.getElementById('study_hour');//学習時間
+var checked = document.getElementsByName('checked');
 
 //クローズ（×）ボタンを押した時の処理
 closeBtn.addEventListener('click', function () {
@@ -88,6 +97,11 @@ closeBtn.addEventListener('click', function () {
     tweet2.classList.remove('in_show');
     loading.classList.remove('in_show');
     loaded.style.display = 'none';
+    //選択したチェックボックス の背景色を元に戻す
+    checked.forEach(e => {
+        e.style.background ="#f4f5f9" ;     
+    });
+    
     texts.value = '';       //記入内容をリセット
     study_day.value = '';//記入内容をリセット
     study_hour.value = '';//記入内容をリセット
@@ -238,3 +252,4 @@ window.onresize = function () {
     drawCircle_language();
     drawCircle_content();
 };
+
