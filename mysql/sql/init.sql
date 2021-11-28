@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS questions;
 CREATE TABLE questions (
 id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-big_question_id INT NOT NULL
+big_question_id INT NOT NULL,
 image VARCHAR(225) NOT NULL
 );
 

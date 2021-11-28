@@ -16,9 +16,9 @@ try {
     exit();
 }
 
-$Data = $pdo->prepare('SELECT * FROM questions WHERE id=?');
+$Data = $pdo->prepare('SELECT * FROM questions');
 $Data->execute(array($_REQUEST['id']));
-$hyouji = $Data->fetch();
+$hyouji = $Data->fetchAll();
 
 $choice = $pdo->prepare('SELECT * FROM choices ');
 $choice->execute(array($_REQUEST['id']));
@@ -42,7 +42,7 @@ $choice_data = $choice->fetchAll();
     ?> -->
     <div>
         <h1></h1>
-        <img src="" alt="">
+        <img src="./quizy_image/<?php echo $hyouji[0]['image']; ?>" alt="">
         <ul>
             <li><?php print($choice_data[0]['name']);?></li>
             <li><?php print($choice_data[1]['name']);?></li>
@@ -51,7 +51,7 @@ $choice_data = $choice->fetchAll();
     </div>
     <div>
         <h1></h1>
-        <img src="" alt="">
+        <img src="./quizy_image/<?php echo $hyouji[1]['image']; ?>" alt="">
         <ul>
             <li><?php print($choice_data[3]['name']);?></li>
             <li><?php print($choice_data[4]['name']);?></li>
@@ -62,7 +62,7 @@ $choice_data = $choice->fetchAll();
 </body>
 </html>
 
-Array (
+<!-- Array (
 [0] => Array ( [id] => 1 [0] => 1 [question_id] => 1 [1] => 1 [name] => たかなわ [2] => たかなわ [valid] => 1 [3] => 1 ) 
 [1] => Array ( [id] => 2 [0] => 2 [question_id] => 1 [1] => 1 [name] => たかわ [2] => たかわ [valid] => 0 [3] => 0 ) 
 [2] => Array ( [id] => 3 [0] => 3 [question_id] => 1 [1] => 1 [name] => こうわ [2] => こうわ [valid] => 0 [3] => 0 ) 
@@ -71,4 +71,4 @@ Array (
 [5] => Array ( [id] => 6 [0] => 6 [question_id] => 2 [1] => 2 [name] => かめいど [2] => かめいど [valid] => 1 [3] => 1 ) 
 [6] => Array ( [id] => 7 [0] => 7 [question_id] => 3 [1] => 3 [name] => もこうひら [2] => もこうひら [valid] => 0 [3] => 0 ) 
 [7] => Array ( [id] => 8 [0] => 8 [question_id] => 3 [1] => 3 [name] => むきひら [2] => むきひら [valid] => 0 [3] => 0 ) 
-[8] => Array ( [id] => 9 [0] => 9 [question_id] => 3 [1] => 3 [name] => むかいなだ [2] => むかいなだ [valid] => 1 [3] => 1 ) )
+[8] => Array ( [id] => 9 [0] => 9 [question_id] => 3 [1] => 3 [name] => むかいなだ [2] => むかいなだ [valid] => 1 [3] => 1 ) ) -->
