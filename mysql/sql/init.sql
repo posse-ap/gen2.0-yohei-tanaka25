@@ -1,10 +1,14 @@
 DROP TABLE IF EXISTS questions;
 CREATE TABLE questions (
 id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-name VARCHAR(225) NOT NULL
+big_question_id INT NOT NULL
+image VARCHAR(225) NOT NULL
 );
 
-INSERT INTO questions (name) VALUES ('東京の難読地名クイズ'), ('広島県の難読地名クイズ');
+INSERT INTO questions (big_question_id, image ) VALUES
+(1,'takanawa.png' ), 
+(1,'kameido.png '),
+(2,'mukainada.png');
 
 
 DROP TABLE IF EXISTS choices;
