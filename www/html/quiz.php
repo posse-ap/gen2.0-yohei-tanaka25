@@ -5,22 +5,23 @@ $password = 'password';
 
 try {
     $pdo = new PDO($dsn, $user, $password);
-    $stmt = $pdo->query("SELECT * FROM questions");
+    // $stmt = $pdo->query("SELECT * FROM questions" );
+    // $posts = $stmt->fetchAll();
+    
+    $stmt = $pdo->query("SELECT * FROM choices");
     $posts = $stmt->fetchAll();
-
-    $stmtt = $pdo->query("SELECT * FROM choices");
-    $posts = $stmtt->fetchAll();
-    echo "接続成功\n";
+    // echo "接続成功\n";
 } catch (PDOException $e) {
     echo "接続失敗: " . $e->getMessage() . "\n";
     exit();
 }
 
-$Data = $pdo->prepare('SELECT * FROM questions');
-$Data->execute(array($_REQUEST['id']));
-$hyouji = $Data->fetchAll();
+$id = $_GET['id'];
+// $Data = $pdo->prepare('SELECT * FROM questions WHERE big_question_id='.$id);
+// $Data->execute(array($_REQUEST['id']));
+// $image = $Data->fetchAll();
 
-$choice = $pdo->prepare('SELECT * FROM choices ');
+$choice = $pdo->prepare('SELECT * FROM choices WHERE big_question_id='.$id);
 $choice->execute(array($_REQUEST['id']));
 $choice_data = $choice->fetchAll();
 
@@ -34,41 +35,41 @@ $choice_data = $choice->fetchAll();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php print($hyouji['name']);?></title>
+    <link rel="stylesheet" href="style.css">
+    <title></title>
 </head>
 <body>
-    <!-- <?php
-    print_r($choice_data);
-    ?> -->
-    <div>
-        <h1></h1>
-        <img src="./quizy_image/<?php echo $hyouji[0]['image']; ?>" alt="">
-        <ul>
-            <li><?php print($choice_data[0]['name']);?></li>
-            <li><?php print($choice_data[1]['name']);?></li>
-            <li><?php print($choice_data[2]['name']);?></li>
-        </ul>
+    <?php foreach ($choice_data as $choice_data){
+        // echo ($choice_data['question_id']);
+
+    ?>
+    <div class="container">
+        <div>
+            <h1 class="title"> 
+                <span class="under"><?php echo $choice_data['question_id'] ?>.この地名は</span>何と読む？
+            </h1>
+            <div>
+                <img  class="pic" src="./quizy_image/<?php echo $choice_data['image']; ?>" alt="難読地名画像" >
+            </div>
+            <ul>
+                <li class="choice"><?php print($choice_data['choice1']);?></li>
+                <li class="choice"><?php print($choice_data['choice2']);?></li>
+                <li class="choice"><?php print($choice_data['choice3']);?></li>
+            </ul>
+        </div>
+        <div class="answer_box">
+            <span class="answer">正解!</span>
+            <p>正解は<?php print($choice_data['choice1']);?>です！</p>
+        </div>
+        <div class="non_answer_box">
+            <span class="non_answer">不正解!</span>
+            <p>正解は<?php print($choice_data['choice1']);?>です！</p>
+        </div>
     </div>
-    <div>
-        <h1></h1>
-        <img src="./quizy_image/<?php echo $hyouji[1]['image']; ?>" alt="">
-        <ul>
-            <li><?php print($choice_data[3]['name']);?></li>
-            <li><?php print($choice_data[4]['name']);?></li>
-            <li><?php print($choice_data[5]['name']);?></li>
-        </ul>
-    </div>
-    
+
+        <?php }; ?>
+
+
 </body>
 </html>
 
-<!-- Array (
-[0] => Array ( [id] => 1 [0] => 1 [question_id] => 1 [1] => 1 [name] => たかなわ [2] => たかなわ [valid] => 1 [3] => 1 ) 
-[1] => Array ( [id] => 2 [0] => 2 [question_id] => 1 [1] => 1 [name] => たかわ [2] => たかわ [valid] => 0 [3] => 0 ) 
-[2] => Array ( [id] => 3 [0] => 3 [question_id] => 1 [1] => 1 [name] => こうわ [2] => こうわ [valid] => 0 [3] => 0 ) 
-[3] => Array ( [id] => 4 [0] => 4 [question_id] => 2 [1] => 2 [name] => かめと [2] => かめと [valid] => 0 [3] => 0 ) 
-[4] => Array ( [id] => 5 [0] => 5 [question_id] => 2 [1] => 2 [name] => かめど [2] => かめど [valid] => 0 [3] => 0 ) 
-[5] => Array ( [id] => 6 [0] => 6 [question_id] => 2 [1] => 2 [name] => かめいど [2] => かめいど [valid] => 1 [3] => 1 ) 
-[6] => Array ( [id] => 7 [0] => 7 [question_id] => 3 [1] => 3 [name] => もこうひら [2] => もこうひら [valid] => 0 [3] => 0 ) 
-[7] => Array ( [id] => 8 [0] => 8 [question_id] => 3 [1] => 3 [name] => むきひら [2] => むきひら [valid] => 0 [3] => 0 ) 
-[8] => Array ( [id] => 9 [0] => 9 [question_id] => 3 [1] => 3 [name] => むかいなだ [2] => むかいなだ [valid] => 1 [3] => 1 ) ) -->

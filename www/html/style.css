@@ -142,6 +142,10 @@ header h4 svg {
 .under {
     border-bottom: solid #03AB37;
 }
+.pic{
+    width: 100%;
+    text-align: center;
+}
 
 .choice {
     cursor: pointer;
