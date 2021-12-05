@@ -7,7 +7,7 @@ try {
     $pdo = new PDO($dsn, $user, $password);
     // $stmt = $pdo->query("SELECT * FROM questions" );
     // $posts = $stmt->fetchAll();
-    
+
     $stmt = $pdo->query("SELECT * FROM choices");
     $posts = $stmt->fetchAll();
     // echo "接続成功\n";
@@ -39,9 +39,10 @@ $choice_data = $choice->fetchAll();
     <title></title>
 </head>
 <body>
+    
     <?php foreach ($choice_data as $choice_data){
-        // echo ($choice_data['question_id']);
-
+        $shuffle_number = [0,1,2];
+        shuffle($shuffle_number);
     ?>
     <div class="container">
         <div>
@@ -52,24 +53,24 @@ $choice_data = $choice->fetchAll();
                 <img  class="pic" src="./quizy_image/<?php echo $choice_data['image']; ?>" alt="難読地名画像" >
             </div>
             <ul>
-                <li class="choice"><?php print($choice_data['choice1']);?></li>
-                <li class="choice"><?php print($choice_data['choice2']);?></li>
-                <li class="choice"><?php print($choice_data['choice3']);?></li>
+                <li class="choice" id="choice<?php  print($choice_data['question_id']) ?>_<?= $shuffle_number[0]?>" onclick="click_choices(<?php  print($choice_data['question_id']) ?>,<?= $shuffle_number[0]?>,0)"><?= $choice_data["choice$shuffle_number[0]"];?></li>
+                <li class="choice" id="choice<?php  print($choice_data['question_id']) ?>_<?= $shuffle_number[1]?>" onclick="click_choices(<?php  print($choice_data['question_id']) ?>,<?= $shuffle_number[1]?>,0)"><?= $choice_data["choice$shuffle_number[1]"];?></li>
+                <li class="choice" id="choice<?php  print($choice_data['question_id']) ?>_<?= $shuffle_number[2]?>" onclick="click_choices(<?php  print($choice_data['question_id']) ?>,<?= $shuffle_number[2]?>,0)"><?= $choice_data["choice$shuffle_number[2]"];?></li>
             </ul>
         </div>
-        <div class="answer_box">
+        <div class="answer_box" id="answer_box<?php  print($choice_data['question_id']) ?>">
             <span class="answer">正解!</span>
-            <p>正解は<?php print($choice_data['choice1']);?>です！</p>
+            <p>正解は「<?php print($choice_data['choice0']);?>」です！</p>
         </div>
-        <div class="non_answer_box">
+        <div class="non_answer_box" id="non_answer_box<?php  print($choice_data['question_id']) ?>">
             <span class="non_answer">不正解!</span>
-            <p>正解は<?php print($choice_data['choice1']);?>です！</p>
+            <p>正解は「<?php print($choice_data['choice0']);?>」です！</p>
         </div>
     </div>
 
         <?php }; ?>
 
-
+<script src="quizy.js"></script>
 </body>
 </html>
 
