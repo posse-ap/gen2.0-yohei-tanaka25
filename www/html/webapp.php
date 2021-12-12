@@ -1,26 +1,23 @@
 
 <?php
-$dsn = 'mysql:host=db;dbname=quizy;charset=utf8';
+$dsn = 'mysql:host=db;dbname=webapp;charset=utf8';
 $user = 'yohei';
 $password = 'password';
 
 try {
     $pdo = new PDO($dsn, $user, $password);
-    // $stmt = $pdo->query("SELECT * FROM questions" );
-    // $posts = $stmt->fetchAll();
-
-    $stmt = $pdo->query("SELECT * FROM study_contents");
-    $posts = $stmt->fetchAll();
     echo "接続成功\n";
 } catch (PDOException $e) {
     echo "接続失敗: " . $e->getMessage() . "\n";
     exit();
 }
 
-// $id = $_GET['id'];
-// $choice = $pdo->prepare('SELECT * FROM choices WHERE big_question_id='.$id);
-// $choice->execute(array($_REQUEST['id']));
-// $choice_data = $choice->fetchAll();
+$stmt1 = $pdo->query("SELECT * FROM studies WHERE study_id = 1");
+$posts1 = $stmt1->fetchAll();
+
+$stmt2 = $pdo->query("SELECT * FROM studies WHERE study_id = 2");
+$posts2 = $stmt2->fetchAll();
+
 
 
 ?>
@@ -47,14 +44,14 @@ try {
 	<header>
 		<div class="header_left">
 			<img src="https://raw.githubusercontent.com/posse-ap/gen1.0-ph1-posseapp/hayashi/posseLogotouka.png"
-				alt="posse_logo" class="posse_logo">
+			alt="posse_logo" class="posse_logo">
 			<span class="header_left_text">4th week</span>
 		</div>
 		<div class="header_right">
 			<button class="header_button pc" id="open_modal_pc">記録・投稿</button>
 		</div>
 	</header>
-
+	
 	<!-- メインコンテンツ -->
 	<main>
 		<div class="main">
@@ -86,7 +83,7 @@ try {
 					<div id="chart_div" class="hour_graph"></div>
 				</div>
 			</div>
-
+			
 			<!-- mainの右側 -->
 			<div class="right">
 				<!-- 学習言語right1 -->
@@ -97,30 +94,30 @@ try {
 						<div id="chart_languages" class="chart circle_graph1"></div>
 						<!-- 言語の詳細 -->
 						<div class="study_languages">
-							<section class="study_items"><span class="circle" id="i_color1754EF"></span>JavaScrpt</section>
-							<section class="study_items"><span class="circle" id="i_color1071BD"></span>CSS</section>
-							<section class="study_items"><span class="circle" id="i_color20BEDE"></span>PHP</section>
-							<section class="study_items"><span class="circle" id="i_color3CCEFE"></span>HTML</section>
-							<section class="study_items"><span class="circle" id="i_colorB29EF3"></span>Laravel</section>
-							<section class="study_items"><span class="circle" id="i_color6D46EC"></span>SQL</section>
-							<section class="study_items"><span class="circle" id="i_color4A18EF"></span>SHELL</section>
-							<section class="study_items"><span class="circle" id="i_color3105C0"></span>情報システム基礎知識（その他）</section>
+							<?php foreach($posts2 as $posts2){
+								?>
+							<section class="study_items"><span class="circle" id="i_color<?php  print($posts2['color']) ?>"></span><?= $posts2['study_detail']?></section>
+							<?php }; ?>
 						</div>
 					</div>
-
+					
 					<!-- 学習コンテンツ right2 -->
 					<div class="right_contents">
 						<h3 class="right_box_titles">学習コンテンツ</h3>
 						<!-- 学習コンテンツの円グラフ -->
 						<div id="chart_contents" class="chart circle_graph2"></div>
 						<div>
-							<section class="study_contents"><span class="circle" id="s_color1754EF"></span>ドットインストール</section>
-							<section class="study_contents"><span class="circle" id="s_color1071BD"></span>N予備校</section>
-							<section class="study_contents"><span class="circle" id="s_color20BEDE"></span>POSSE課題</section>
+							<?=  print_r($posts1[0]["study_detail"]) ?>
+							<?=  print_r($posts1[0]["study_detail"]) ?>
+							<?php foreach($posts1 as $posts1){
+								?>
+							<section class="study_items"><span class="circle" id="i_color<?php  print($posts1['color']) ?>"></span><?= $posts1['study_detail']?></section>
+							<?php }; ?>
+							<?=  print_r($posts1[0]["study_detail"]) ?>
 						</div>
 					</div>
 				</div>
-
+				
 			</div>
 			<!-- スマホ版のフッターと記録・投稿ボタン -->
 			<footer class="footer sp">
@@ -149,15 +146,15 @@ try {
 				<div class="modal_study_contents">
 					<h3 class="title">学習コンテンツ（複数選択可）</h3>
 					<form class="modal_study_contents_all" name="study_contents">
+					<!-- <?php foreach($posts1 as $posts1){
+						
+								?>
+						<?php  print($posts1['id']) ?>
+						<?php }; ?> -->
 						<label class="modal_study_contents_check" name="checked" value="グレー"><input type="checkbox" class="Checkbox"
-								id="c_box1" onclick="chebg('c_box1')"><span
-								class="check_content Checkbox-fontas">N予備校</span></label>
-						<label class="modal_study_contents_check" name="checked" value="グレー"><input type="checkbox" class="Checkbox"
-								id="c_box2" onclick="chebg('c_box2')"><span
-								class="check_content Checkbox-fontas">ドットインストール</span></label>
-						<label class="modal_study_contents_check" name="checked" value="グレー"><input type="checkbox" class="Checkbox"
-								id="c_box3" onclick="chebg('c_box3')"><span
-								class="check_content Checkbox-fontas">POSSE課題</span></label>
+						id="c_box<?php  print($posts1[0]['id']) ?>" onclick="chebg('c_box<?php  print($posts1[0]['id']) ?>')"><span
+						class="check_content Checkbox-fontas"><?php print_r($posts1[0]["study_detail"])?></span></label>
+						
 					</form>
 				</div>
 				<!-- 学習言語 -->
@@ -236,3 +233,8 @@ try {
 </body>
 
 </html>
+
+
+Array ( [0] => Array ( [id] => 1 [0] => 1 [study_id] => 1 [1] => 1 [study_detail] => ドットインストール [2] => ドットインストール [color] => 1754EF [3] => 1754EF ) 
+        [1] => Array ( [id] => 2 [0] => 2 [study_id] => 1 [1] => 1 [study_detail] => N予備校 [2] => N予備校 [color] => 1071BD [3] => 1071BD ) 
+		[2] => Array ( [id] => 3 [0] => 3 [study_id] => 1 [1] => 1 [study_detail] => POSSE課題 [2] => POSSE課題 [color] => 20BEDE [3] => 20BEDE ) ) 1
