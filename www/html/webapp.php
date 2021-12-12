@@ -6,7 +6,7 @@ $password = 'password';
 
 try {
     $pdo = new PDO($dsn, $user, $password);
-    echo "接続成功\n";
+    // echo "接続成功\n";
 } catch (PDOException $e) {
     echo "接続失敗: " . $e->getMessage() . "\n";
     exit();
@@ -15,10 +15,24 @@ try {
 $stmt1 = $pdo->query("SELECT * FROM studies WHERE study_id = 1");
 $posts1 = $stmt1->fetchAll();
 
+$stmt1_1 = $pdo->query("SELECT * FROM studies WHERE study_id = 1");
+$posts1_1= $stmt1_1->fetchAll();
+
+
 $stmt2 = $pdo->query("SELECT * FROM studies WHERE study_id = 2");
 $posts2 = $stmt2->fetchAll();
 
+$stmt2_1 = $pdo->query("SELECT * FROM studies WHERE study_id = 2");
+$posts2_1 = $stmt2_1->fetchAll();
 
+$stmt3 = $pdo->query("SELECT sum(study_hour) FROM posts WHERE date BETWEEN '2021-10-01' AND '2021-10-31'");
+$posts3 = $stmt3->fetchAll();
+
+$stmt4 = $pdo->query("SELECT sum(study_hour) FROM posts WHERE date BETWEEN '2021-01-01' AND '2021-12-31'");
+$posts4 = $stmt4->fetchAll();
+
+// $stmt5 = $pdo->query("SELECT sum(study_hour) FROM posts WHERE date '2021-12-12' ");
+// $posts5 = $stmt5->fetchAll();
 
 ?>
 
@@ -61,19 +75,19 @@ $posts2 = $stmt2->fetchAll();
 				<div class="left_box">
 					<div class="box">
 						<p class="today">Today</p>
-						<p class="hour_number">3</p>
+						<p class="hour_number">0</p>
 						<p class="hour">hour</p>
 					</div>
 					<!-- month部分 -->
 					<div class="box">
 						<p class="month">Month</p>
-						<p class="hour_number">120</p>
+						<p class="hour_number"><?php print_r($posts3[0][0]) ?></p>
 						<p class="hour">hour</p>
 					</div>
 					<!-- total部分-->
 					<div class="box">
 						<p class="total">Total</p>
-						<p class="hour_number">1348</p>
+						<p class="hour_number"><?php print_r($posts4[0][0]) ?></p>
 						<p class="hour">hour</p>
 					</div>
 				</div>
@@ -107,13 +121,10 @@ $posts2 = $stmt2->fetchAll();
 						<!-- 学習コンテンツの円グラフ -->
 						<div id="chart_contents" class="chart circle_graph2"></div>
 						<div>
-							<?=  print_r($posts1[0]["study_detail"]) ?>
-							<?=  print_r($posts1[0]["study_detail"]) ?>
 							<?php foreach($posts1 as $posts1){
 								?>
 							<section class="study_items"><span class="circle" id="i_color<?php  print($posts1['color']) ?>"></span><?= $posts1['study_detail']?></section>
 							<?php }; ?>
-							<?=  print_r($posts1[0]["study_detail"]) ?>
 						</div>
 					</div>
 				</div>
@@ -146,45 +157,27 @@ $posts2 = $stmt2->fetchAll();
 				<div class="modal_study_contents">
 					<h3 class="title">学習コンテンツ（複数選択可）</h3>
 					<form class="modal_study_contents_all" name="study_contents">
-					<!-- <?php foreach($posts1 as $posts1){
-						
+					<?php foreach($posts1_1 as $posts1_1){
 								?>
-						<?php  print($posts1['id']) ?>
-						<?php }; ?> -->
 						<label class="modal_study_contents_check" name="checked" value="グレー"><input type="checkbox" class="Checkbox"
-						id="c_box<?php  print($posts1[0]['id']) ?>" onclick="chebg('c_box<?php  print($posts1[0]['id']) ?>')"><span
-						class="check_content Checkbox-fontas"><?php print_r($posts1[0]["study_detail"])?></span></label>
+						id="c_box<?php  print($posts1_1['id']) ?>" onclick="chebg('c_box<?php  print($posts1_1['id']) ?>')"><span
+						class="check_content Checkbox-fontas"><?php print_r($posts1_1["study_detail"])?></span></label>
 						
+						<?php }; ?>
 					</form>
 				</div>
 				<!-- 学習言語 -->
 				<div class="modal_study_languages">
 					<h3 class="title">学習言語（複数選択可）</h3>
 					<form class="modal_study_languages_all" name="study_languages">
-						<label class="modal_study_languages_check" name="checked" value="グレー"><input type="checkbox"
-								class="Checkbox" id="c_box4" onclick="chebg('c_box4')"><span
-								class="check_language Checkbox-fontas">HTML</span></label>
-						<label class="modal_study_languages_check " name="checked" value="グレー"><input type="checkbox"
-								class="Checkbox" id="c_box5" onclick="chebg('c_box5')"><span
-								class="check_language Checkbox-fontas">CSS</span></label>
-						<label class="modal_study_languages_check " name="checked" value="グレー"><input type="checkbox"
-								class="Checkbox" id="c_box6" onclick="chebg('c_box6')"><span
-								class="check_language Checkbox-fontas">JavaScrpt</span></label>
-						<label class="modal_study_languages_check" name="checked" value="グレー"><input type="checkbox"
-								class="Checkbox" id="c_box7" onclick="chebg('c_box7')"><span
-								class="check_language Checkbox-fontas">PHP</span></label>
-						<label class="modal_study_languages_check" name="checked" value="グレー"><input type="checkbox"
-								class="Checkbox" id="c_box8" onclick="chebg('c_box8')"><span
-								class="check_language Checkbox-fontas">Laravel</span></label>
-						<label class="modal_study_languages_check" name="checked" value="グレー"><input type="checkbox"
-								class="Checkbox" id="c_box9" onclick="chebg('c_box9')"><span
-								class="check_language Checkbox-fontas">SQL</span></label>
-						<label class="modal_study_languages_check" name="checked" value="グレー"><input type="checkbox"
-								class="Checkbox" id="c_box10" onclick="chebg('c_box10')"><span
-								class="check_language Checkbox-fontas">SHELL</span></label>
-						<label class="modal_study_languages_check" name="checked" value="グレー"><input type="checkbox"
-								class="Checkbox" id="c_box11" onclick="chebg('c_box11')"><span
-								class="check_language Checkbox-fontas">情報システム基礎知識（その他）</span></label>
+					<?php foreach($posts2_1 as $posts2_1){
+								?>
+						<label class="modal_study_contents_check" name="checked" value="グレー"><input type="checkbox" class="Checkbox"
+						id="c_box<?php  print($posts2_1['id']) ?>" onclick="chebg('c_box<?php  print($posts2_1['id']) ?>')"><span
+						class="check_content Checkbox-fontas"><?php print_r($posts2_1["study_detail"])?></span></label>
+						
+						<?php }; ?>
+						
 					</form>
 				</div>
 			</div>
@@ -234,7 +227,3 @@ $posts2 = $stmt2->fetchAll();
 
 </html>
 
-
-Array ( [0] => Array ( [id] => 1 [0] => 1 [study_id] => 1 [1] => 1 [study_detail] => ドットインストール [2] => ドットインストール [color] => 1754EF [3] => 1754EF ) 
-        [1] => Array ( [id] => 2 [0] => 2 [study_id] => 1 [1] => 1 [study_detail] => N予備校 [2] => N予備校 [color] => 1071BD [3] => 1071BD ) 
-		[2] => Array ( [id] => 3 [0] => 3 [study_id] => 1 [1] => 1 [study_detail] => POSSE課題 [2] => POSSE課題 [color] => 20BEDE [3] => 20BEDE ) ) 1

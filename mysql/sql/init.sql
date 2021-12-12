@@ -29,3 +29,11 @@ INSERT INTO studies (study_id, study_detail, color) VALUES
 (2,'SHELL','4A18EF'),
 (2,'情報システム基礎知識（その他）','3105C0');
 
+
+INSERT INTO posts (date, study_hour, study_detail) VALUES
+('2021-8-5', 1, 6),
+('2021-9-8', 4, 3),
+('2021-9-7', 3, 4),
+('2021-10-13', 2, 1),
+('2021-10-26', 4, 7),
+('2021-11-26', 6, 2);
