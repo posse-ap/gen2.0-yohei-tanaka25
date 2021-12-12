@@ -25,14 +25,28 @@ $posts2 = $stmt2->fetchAll();
 $stmt2_1 = $pdo->query("SELECT * FROM studies WHERE study_id = 2");
 $posts2_1 = $stmt2_1->fetchAll();
 
-$stmt3 = $pdo->query("SELECT sum(study_hour) FROM posts WHERE date BETWEEN '2021-10-01' AND '2021-10-31'");
-$posts3 = $stmt3->fetchAll();
 
-$stmt4 = $pdo->query("SELECT sum(study_hour) FROM posts WHERE date BETWEEN '2021-01-01' AND '2021-12-31'");
-$posts4 = $stmt4->fetchAll();
+$stmt = $pdo->query(
+    "SELECT study_hour
+    FROM posts
+    WHERE DATE(study_date) = DATE(now()) 
+    ORDER BY study_date;"
+);
+$today_study_time = $stmt->fetch(PDO::FETCH_COLUMN) ?: 0;
 
-// $stmt5 = $pdo->query("SELECT sum(study_hour) FROM posts WHERE date '2021-12-12' ");
-// $posts5 = $stmt5->fetchAll();
+$stmt = $pdo->query(
+    "SELECT SUM(study_hour) 
+    FROM posts
+    WHERE DATE_FORMAT(study_date, '%Y%m') = DATE_FORMAT(now(), '%Y%m') 
+    GROUP BY study_date;"
+);
+$month_study_time = $stmt->fetch(PDO::FETCH_COLUMN) ?: 0;
+
+$stmt = $pdo->query(
+	"SELECT SUM(study_hour) 
+    FROM posts;"
+);
+$all_study_time = $stmt->fetch(PDO::FETCH_COLUMN) ?: 0;
 
 ?>
 
@@ -75,19 +89,19 @@ $posts4 = $stmt4->fetchAll();
 				<div class="left_box">
 					<div class="box">
 						<p class="today">Today</p>
-						<p class="hour_number">0</p>
+						<p class="hour_number"><?php print_r($today_study_time) ?></p>
 						<p class="hour">hour</p>
 					</div>
 					<!-- month部分 -->
 					<div class="box">
 						<p class="month">Month</p>
-						<p class="hour_number"><?php print_r($posts3[0][0]) ?></p>
+						<p class="hour_number"><?php print_r($month_study_time) ?></p>
 						<p class="hour">hour</p>
 					</div>
 					<!-- total部分-->
 					<div class="box">
 						<p class="total">Total</p>
-						<p class="hour_number"><?php print_r($posts4[0][0]) ?></p>
+						<p class="hour_number"><?php print_r($all_study_time) ?></p>
 						<p class="hour">hour</p>
 					</div>
 				</div>
@@ -108,9 +122,9 @@ $posts4 = $stmt4->fetchAll();
 						<div id="chart_languages" class="chart circle_graph1"></div>
 						<!-- 言語の詳細 -->
 						<div class="study_languages">
-							<?php foreach($posts2 as $posts2){
+							<?php foreach($posts2 as $post2){
 								?>
-							<section class="study_items"><span class="circle" id="i_color<?php  print($posts2['color']) ?>"></span><?= $posts2['study_detail']?></section>
+							<section class="study_items"><span class="circle" id="i_color<?php  print($post2['color']) ?>"></span><?= $post2['study_detail']?></section>
 							<?php }; ?>
 						</div>
 					</div>
@@ -121,9 +135,9 @@ $posts4 = $stmt4->fetchAll();
 						<!-- 学習コンテンツの円グラフ -->
 						<div id="chart_contents" class="chart circle_graph2"></div>
 						<div>
-							<?php foreach($posts1 as $posts1){
+							<?php foreach($posts1 as $post1){
 								?>
-							<section class="study_items"><span class="circle" id="i_color<?php  print($posts1['color']) ?>"></span><?= $posts1['study_detail']?></section>
+							<section class="study_items"><span class="circle" id="i_color<?php  print($post1['color']) ?>"></span><?= $post1['study_detail']?></section>
 							<?php }; ?>
 						</div>
 					</div>
@@ -157,11 +171,11 @@ $posts4 = $stmt4->fetchAll();
 				<div class="modal_study_contents">
 					<h3 class="title">学習コンテンツ（複数選択可）</h3>
 					<form class="modal_study_contents_all" name="study_contents">
-					<?php foreach($posts1_1 as $posts1_1){
+					<?php foreach($posts1_1 as $post1_1){
 								?>
 						<label class="modal_study_contents_check" name="checked" value="グレー"><input type="checkbox" class="Checkbox"
-						id="c_box<?php  print($posts1_1['id']) ?>" onclick="chebg('c_box<?php  print($posts1_1['id']) ?>')"><span
-						class="check_content Checkbox-fontas"><?php print_r($posts1_1["study_detail"])?></span></label>
+						id="c_box<?php  print($post1_1['id']) ?>" onclick="chebg('c_box<?php  print($post1_1['id']) ?>')"><span
+						class="check_content Checkbox-fontas"><?php print_r($post1_1["study_detail"])?></span></label>
 						
 						<?php }; ?>
 					</form>
@@ -170,11 +184,11 @@ $posts4 = $stmt4->fetchAll();
 				<div class="modal_study_languages">
 					<h3 class="title">学習言語（複数選択可）</h3>
 					<form class="modal_study_languages_all" name="study_languages">
-					<?php foreach($posts2_1 as $posts2_1){
+					<?php foreach($posts2_1 as $post2_1){
 								?>
 						<label class="modal_study_contents_check" name="checked" value="グレー"><input type="checkbox" class="Checkbox"
-						id="c_box<?php  print($posts2_1['id']) ?>" onclick="chebg('c_box<?php  print($posts2_1['id']) ?>')"><span
-						class="check_content Checkbox-fontas"><?php print_r($posts2_1["study_detail"])?></span></label>
+						id="c_box<?php  print($post2_1['id']) ?>" onclick="chebg('c_box<?php  print($post2_1['id']) ?>')"><span
+						class="check_content Checkbox-fontas"><?php print_r($post2_1["study_detail"])?></span></label>
 						
 						<?php }; ?>
 						

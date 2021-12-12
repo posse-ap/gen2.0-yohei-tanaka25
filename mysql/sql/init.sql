@@ -10,7 +10,7 @@ color VARCHAR(225) NOT NULL
 DROP TABLE IF EXISTS posts;
 CREATE TABLE posts (
 id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-date date NOT NULL,
+study_date datetime NOT NULL,
 study_hour INT NOT NULL,
 study_detail INT NOT NULL
 );
@@ -30,7 +30,7 @@ INSERT INTO studies (study_id, study_detail, color) VALUES
 (2,'情報システム基礎知識（その他）','3105C0');
 
 
-INSERT INTO posts (date, study_hour, study_detail) VALUES
+INSERT INTO posts (study_date, study_hour, study_detail) VALUES
 ('2021-8-5', 1, 6),
 ('2021-9-8', 4, 3),
 ('2021-9-7', 3, 4),
