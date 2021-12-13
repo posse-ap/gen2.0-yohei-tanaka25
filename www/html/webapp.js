@@ -229,6 +229,7 @@ function drawCircle_content() {
         ['ドットインストール', 19.9],
         ['N予備校', 11.8],
         ['posse課題', 12],
+        
     ]);
 
     var formatter = new google.visualization.NumberFormat({ pattern: '#,###.0' + '時間' });
@@ -252,4 +253,3 @@ window.onresize = function () {
     drawCircle_language();
     drawCircle_content();
 };
-

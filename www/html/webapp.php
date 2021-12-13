@@ -48,6 +48,10 @@ $stmt = $pdo->query(
 );
 $all_study_time = $stmt->fetch(PDO::FETCH_COLUMN) ?: 0;
 
+$stmt = $pdo->query("SELECT * FROM posts WHERE DATE_FORMAT(study_date, '%Y%m') = DATE_FORMAT(now(), '%Y%m') ");
+$graph_dates = $stmt->fetchAll();
+print_r($graph_dates);
+
 ?>
 
 
@@ -63,11 +67,11 @@ $all_study_time = $stmt->fetch(PDO::FETCH_COLUMN) ?: 0;
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
-
-<body>
+			<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+			</head>
+			
+			<body>
 	<!-- ヘッダー -->
 	<header>
 		<div class="header_left">
@@ -172,7 +176,7 @@ $all_study_time = $stmt->fetch(PDO::FETCH_COLUMN) ?: 0;
 					<h3 class="title">学習コンテンツ（複数選択可）</h3>
 					<form class="modal_study_contents_all" name="study_contents">
 					<?php foreach($posts1_1 as $post1_1){
-								?>
+						?>
 						<label class="modal_study_contents_check" name="checked" value="グレー"><input type="checkbox" class="Checkbox"
 						id="c_box<?php  print($post1_1['id']) ?>" onclick="chebg('c_box<?php  print($post1_1['id']) ?>')"><span
 						class="check_content Checkbox-fontas"><?php print_r($post1_1["study_detail"])?></span></label>
@@ -185,7 +189,7 @@ $all_study_time = $stmt->fetch(PDO::FETCH_COLUMN) ?: 0;
 					<h3 class="title">学習言語（複数選択可）</h3>
 					<form class="modal_study_languages_all" name="study_languages">
 					<?php foreach($posts2_1 as $post2_1){
-								?>
+						?>
 						<label class="modal_study_contents_check" name="checked" value="グレー"><input type="checkbox" class="Checkbox"
 						id="c_box<?php  print($post2_1['id']) ?>" onclick="chebg('c_box<?php  print($post2_1['id']) ?>')"><span
 						class="check_content Checkbox-fontas"><?php print_r($post2_1["study_detail"])?></span></label>
@@ -210,7 +214,7 @@ $all_study_time = $stmt->fetch(PDO::FETCH_COLUMN) ?: 0;
 
 				<div class="twitter">
 					<label class="twitter_label"><input type="checkbox" class="Checkbox tw" id="twitter_check_box"
-							checked><span class="twitter_check Checkbox-fontas">Twitterにシェアする</span>
+					checked><span class="twitter_check Checkbox-fontas">Twitterにシェアする</span>
 					</label>
 				</div>
 			</div>
@@ -236,7 +240,55 @@ $all_study_time = $stmt->fetch(PDO::FETCH_COLUMN) ?: 0;
 		<h5 class="footer_text">＜ 2021年 10月 ＞</h5>
 	</footer>
 
-	<script src="webapp.js"></script>
+	<!-- <script src="webapp.js"></script> -->
+	
+	<script type="text/javascript">
+				
+	google.load('visualization', '1', { 'packages': ['corechart'] });
+	
+	// グラフを描画する為のコールバック関数を指定
+	google.setOnLoadCallback(drawChart);
+	
+	// グラフの描画   
+	function drawChart() {
+		// 配列からデータの生成
+		var data = google.visualization.arrayToDataTable([
+			['day', 'hour', { role: 'style' }],
+			<?php foreach($graph_dates as $graph_date){
+				?>
+			[<?php  print($graph_date['study_date']) ?>,<?php  print($graph_date['study_hour']) ?> , 'color: #76A7FA'],
+			<?php }; ?>
+			
+		]);
+		
+		// オプションの設定
+		var options = {
+			legend: { position: 'none' },
+			width: "100%",
+			height: '400',
+			bar: { groupWidth: "60%" },
+			//x軸
+			hAxis: {
+				gridlines: { color: 'none' },
+				ticks: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30],
+				titleTextStyle: { color: '#137DC4' }
+			},
+			//y軸
+			vAxis: {
+				title: '', format: "#.#h",
+				minValue: 0,
+				gridlines: { color: 'none' },
+				baselineColor: 'block',
+				textPosition: 'out',
+				ticks: [2, 4, 6, 8]
+			},
+		};
+		// 指定されたIDの要素に棒グラフを作成
+		var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+    	// グラフの描画
+    	chart.draw(data, options);
+	};
+	</script>
 </body>
 
 </html>
