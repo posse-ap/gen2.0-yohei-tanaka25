@@ -67,11 +67,12 @@ print_r($graph_dates);
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-			<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-			</head>
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	</head>
+	
 			
-			<body>
+<body>
 	<!-- ヘッダー -->
 	<header>
 		<div class="header_left">
@@ -113,6 +114,51 @@ print_r($graph_dates);
 				<!-- <img src="./image/graph1.png" alt="棒グラフ" class="hour_graph"> -->
 				<div class="hour_graph_whole">
 					<div id="chart_div" class="hour_graph"></div>
+<script type="text/javascript">
+google.load('visualization', '1', { 'packages': ['corechart'] });
+
+// グラフを描画する為のコールバック関数を指定
+google.setOnLoadCallback(drawChart);
+
+// グラフの描画   
+function drawChart() {
+    // 配列からデータの生成
+    var data = google.visualization.arrayToDataTable([
+        ['day', 'hour', { role: 'style' }],
+		<?php foreach($graph_dates as $graph_date){
+								?>
+		['<?php echo $graph_date['study_date'] ?>', <?php echo $graph_date['study_hour'] ?>,'color: #76A7FA'],
+		<?php }; ?>
+    ]);
+
+    // オプションの設定
+    var options = {
+        legend: { position: 'none' },
+        width: "100%",
+        height: '400',
+        bar: { groupWidth: "3%" },
+        //x軸
+        hAxis: {
+            gridlines: { color: 'none' },
+            ticks: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30],
+            titleTextStyle: { color: '#137DC4' }
+        },
+        //y軸
+        vAxis: {
+            title: '', format: "#.#h",
+            minValue: 0,
+            gridlines: { color: 'none' },
+            baselineColor: 'block',
+            textPosition: 'out',
+            ticks: [2, 4, 6, 8]
+        },
+    };
+    // 指定されたIDの要素に棒グラフを作成
+    var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+    // グラフの描画
+    chart.draw(data, options);
+};
+</script>
 				</div>
 			</div>
 			
@@ -124,6 +170,41 @@ print_r($graph_dates);
 						<h3 class="right_box_titles">学習言語</h3>
 						<!-- 学習言語の円グラフ -->
 						<div id="chart_languages" class="chart circle_graph1"></div>
+<script type="text/javascript">
+google.load('visualization', '1', { 'packages': ['corechart'] });
+
+// グラフを描画する為のコールバック関数を指定
+google.setOnLoadCallback(drawChart);
+
+// グラフの描画   
+function drawChart() {
+    // 配列からデータの生成
+    var data2 = new google.visualization.arrayToDataTable([
+        ['language', 'hour'],
+		<?php foreach($graph_dates as $graph_date){
+								?>
+		['<?php echo $graph_date['study_detail'] ?>', <?php echo $graph_date['study_hour'] ?>],
+		<?php }; ?>
+    ]);
+    
+    var formatter2 = new google.visualization.NumberFormat({ pattern: '#,###.0' + '時間' });
+    formatter2.format(data2, 1);
+
+    // オプションの設定
+    var options2 = {
+        pieHole: 0.5,
+        legend: 'none',
+        colors: ['#2A54EF', '#1B71BD', '#21BDDE', '#3DCEFD', '#B39EF3', '#6D47EC', '#4A18EF', '#3107BF'],
+        width: '100%',
+        height: '254',
+        chartArea: { width: '100%', height: '100%', top: 0 },
+    };
+
+    var chart_languages = new google.visualization.PieChart(document.getElementById('chart_languages'));
+    chart_languages.draw(data2, options2);
+    
+};
+</script>
 						<!-- 言語の詳細 -->
 						<div class="study_languages">
 							<?php foreach($posts2 as $post2){
@@ -138,6 +219,41 @@ print_r($graph_dates);
 						<h3 class="right_box_titles">学習コンテンツ</h3>
 						<!-- 学習コンテンツの円グラフ -->
 						<div id="chart_contents" class="chart circle_graph2"></div>
+<script type="text/javascript">
+google.load('visualization', '1', { 'packages': ['corechart'] });
+
+// グラフを描画する為のコールバック関数を指定
+google.setOnLoadCallback(drawChart);
+
+// グラフの描画   
+function drawChart() {
+    // 配列からデータの生成
+    var data = new google.visualization.arrayToDataTable([
+        ['language', 'hour'],
+		<?php foreach($graph_dates as $graph_date){
+								?>
+		['<?php echo $graph_date['study_detail'] ?>', <?php echo $graph_date['study_hour'] ?>],
+		<?php }; ?>
+    ]);
+    
+    var formatter = new google.visualization.NumberFormat({ pattern: '#,###.0' + '時間' });
+    formatter.format(data, 1);
+
+    // オプションの設定
+    var options = {
+        pieHole: 0.5,
+        legend: 'none',
+        colors: ['#2A54EF', '#1B71BD', '#21BDDE', '#3DCEFD', '#B39EF3', '#6D47EC', '#4A18EF', '#3107BF'],
+        width: '100%',
+        height: '254',
+        chartArea: { width: '100%', height: '100%', top: 0 },
+    };
+
+    var chart_contents  = new google.visualization.PieChart(document.getElementById('chart_contents'));
+	chart_contents.draw(data, options);
+    
+};
+</script>
 						<div>
 							<?php foreach($posts1 as $post1){
 								?>
@@ -237,58 +353,10 @@ print_r($graph_dates);
 	<!-- フッター -->
 	<div id="overlay" class=""></div>
 	<footer class="footer pc">
-		<h5 class="footer_text">＜ 2021年 10月 ＞</h5>
+		<h5 class="footer_text">＜ 2021年 12月 ＞</h5>
 	</footer>
-
 	<!-- <script src="webapp.js"></script> -->
 	
-	<script type="text/javascript">
-				
-	google.load('visualization', '1', { 'packages': ['corechart'] });
-	
-	// グラフを描画する為のコールバック関数を指定
-	google.setOnLoadCallback(drawChart);
-	
-	// グラフの描画   
-	function drawChart() {
-		// 配列からデータの生成
-		var data = google.visualization.arrayToDataTable([
-			['day', 'hour', { role: 'style' }],
-			<?php foreach($graph_dates as $graph_date){
-				?>
-			[<?php  print($graph_date['study_date']) ?>,<?php  print($graph_date['study_hour']) ?> , 'color: #76A7FA'],
-			<?php }; ?>
-			
-		]);
-		
-		// オプションの設定
-		var options = {
-			legend: { position: 'none' },
-			width: "100%",
-			height: '400',
-			bar: { groupWidth: "60%" },
-			//x軸
-			hAxis: {
-				gridlines: { color: 'none' },
-				ticks: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30],
-				titleTextStyle: { color: '#137DC4' }
-			},
-			//y軸
-			vAxis: {
-				title: '', format: "#.#h",
-				minValue: 0,
-				gridlines: { color: 'none' },
-				baselineColor: 'block',
-				textPosition: 'out',
-				ticks: [2, 4, 6, 8]
-			},
-		};
-		// 指定されたIDの要素に棒グラフを作成
-		var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-    	// グラフの描画
-    	chart.draw(data, options);
-	};
-	</script>
 </body>
 
 </html>
