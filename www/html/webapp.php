@@ -3,9 +3,14 @@
 $dsn = 'mysql:host=db;dbname=webapp;charset=utf8';
 $user = 'yohei';
 $password = 'password';
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
 
 try {
-    $pdo = new PDO($dsn, $user, $password);
+    $pdo = new PDO($dsn, $user, $password, $options);
     // echo "接続成功\n";
 } catch (PDOException $e) {
     echo "接続失敗: " . $e->getMessage() . "\n";
@@ -50,7 +55,19 @@ $all_study_time = $stmt->fetch(PDO::FETCH_COLUMN) ?: 0;
 
 $stmt = $pdo->query("SELECT * FROM posts WHERE DATE_FORMAT(study_date, '%Y%m') = DATE_FORMAT(now(), '%Y%m') ");
 $graph_dates = $stmt->fetchAll();
-print_r($graph_dates);
+
+$stmt = $pdo->query("SELECT * FROM posts 
+WHERE DATE_FORMAT(study_date, '%Y%m') = DATE_FORMAT(now(), '%Y%m') 
+AND study_detail BETWEEN 1 AND 3");
+$graph_dates_contents = $stmt->fetchAll();
+// print_r($graph_dates_contents);
+
+$stmt = $pdo->query("SELECT * FROM posts 
+WHERE DATE_FORMAT(study_date, '%Y%m') = DATE_FORMAT(now(), '%Y%m')
+AND study_detail BETWEEN 4 AND 11 ");
+$graph_dates_languages = $stmt->fetchAll();
+
+
 
 ?>
 
@@ -181,7 +198,7 @@ function drawChart() {
     // 配列からデータの生成
     var data2 = new google.visualization.arrayToDataTable([
         ['language', 'hour'],
-		<?php foreach($graph_dates as $graph_date){
+		<?php foreach($graph_dates_languages as $graph_date){
 								?>
 		['<?php echo $graph_date['study_detail'] ?>', <?php echo $graph_date['study_hour'] ?>],
 		<?php }; ?>
@@ -230,7 +247,7 @@ function drawChart() {
     // 配列からデータの生成
     var data = new google.visualization.arrayToDataTable([
         ['language', 'hour'],
-		<?php foreach($graph_dates as $graph_date){
+		<?php foreach($graph_dates_contents as $graph_date){
 								?>
 		['<?php echo $graph_date['study_detail'] ?>', <?php echo $graph_date['study_hour'] ?>],
 		<?php }; ?>
