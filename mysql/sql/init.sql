@@ -9,6 +9,14 @@ choice2 VARCHAR(225) NOT NULL,
 image VARCHAR(225) NOT NULL
 );
 
+DROP TABLE IF EXISTS questions;
+CREATE TABLE questions (
+big_question_id INT NOT NULL,
+question_title VARCHAR(225) NOT NULL
+);
+
+
+
 INSERT INTO choices (big_question_id, question_id, choice0, choice1, choice2, image) VALUES 
 (1, 1, 'たかなわ', 'こうわ', 'たかわ', 'Tokyo1.png'),
 (1, 2, 'かめいど', 'かめと', 'かめど', 'Tokyo2.png'),
@@ -31,3 +39,6 @@ INSERT INTO choices (big_question_id, question_id, choice0, choice1, choice2, im
 (2, 9, 'おおちごとうげ', 'おうちごとうげ', 'おおちごえとうげ','Hiroshima9.png'),
 (2, 10, 'よおろほよばら', 'ていぼよはら', 'てっぽよばら','Hiroshima10.png');
 
+INSERT INTO questions (big_question_id, question_title) VALUES
+(1, '東京の難読地名クイズ'),
+(2, '広島の難読地名クイズ');
