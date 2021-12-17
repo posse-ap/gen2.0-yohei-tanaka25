@@ -29,6 +29,26 @@ $stmt = $pdo->query(
 );
 $all_study_time = $stmt->fetch(PDO::FETCH_COLUMN) ?: 0;
 
+$stmt = $pdo->query(
+	"SELECT *FROM study_data;"
+);
+$graph_data = $stmt->fetchAll();
+// print_r($graph_data);
+
+$stmt = $pdo->query(
+	"SELECT *FROM study_data
+	INNER JOIN study_languages ON study_languages.id = study_data.study_language_id;"
+);
+$graph_data_languages  = $stmt->fetchAll();
+// print_r($graph_data_languages);
+
+$stmt = $pdo->query(
+	"SELECT *FROM study_data
+	INNER JOIN study_contents ON study_contents.id = study_data.study_content_id;"
+);
+$graph_data_contents  = $stmt->fetchAll();
+// print_r($graph_data_contents);
+
 ?>
 
 
@@ -102,11 +122,53 @@ $all_study_time = $stmt->fetch(PDO::FETCH_COLUMN) ?: 0;
 						<h3 class="right_box_titles">学習言語</h3>
 						<!-- 学習言語の円グラフ -->
 						<div id="chart_languages" class="chart circle_graph1"></div>
+						<script type="text/javascript">
+google.load('visualization', '1', { 'packages': ['corechart'] });
+
+// グラフを描画する為のコールバック関数を指定
+google.setOnLoadCallback(drawCircle_language);
+
+// グラフの描画   
+function drawCircle_language() {
+    // 配列からデータの生成
+    var data2 = new google.visualization.arrayToDataTable([
+        ['language', 'hour'],
+		<?php foreach($graph_data_languages as $graph_data){
+								?>
+		['<?php echo $graph_data['study_language'] ?>', <?php echo $graph_data['study_hour'] ?>],
+		<?php }; ?>
+    ]);
+    
+    var formatter2 = new google.visualization.NumberFormat({ pattern: '#,###.0' + '時間' });
+    formatter2.format(data2, 1);
+
+    // オプションの設定
+    var options2 = {
+        pieHole: 0.5,
+        legend: 'none',
+        colors: [<?php foreach($graph_data_languages as $graph_data){
+								?>
+		'#<?php echo $graph_data['color'] ?>',<?php }; ?>],
+								
+        width: '100%',
+        height: '254',
+        chartArea: { width: '100%', height: '100%', top: 0 },
+    };
+
+    var chart_languages = new google.visualization.PieChart(document.getElementById('chart_languages'));
+    chart_languages.draw(data2, options2);
+    
+};
+window.onresize = function () {
+    drawCircle_language();
+
+};
+</script>
 						<!-- 言語の詳細 -->
 						<div class="study_languages">
 							<?php foreach($study_languages  as $study_language){
 								?>
-							<section class="study_items"><span class="circle" id="i_color<?php  print($colors['color']) ?>"></span><?= $study_language['study_language']?></section>
+							<section class="study_items"><span class="circle" id="i_color<?php  print($study_language['color']) ?>"></span><?= $study_language['study_language']?></section>
 							<?php }; ?>
 						</div>
 					</div>
@@ -116,10 +178,44 @@ $all_study_time = $stmt->fetch(PDO::FETCH_COLUMN) ?: 0;
 						<h3 class="right_box_titles">学習コンテンツ</h3>
 						<!-- 学習コンテンツの円グラフ -->
 						<div id="chart_contents" class="chart circle_graph2"></div>
+						<script type="text/javascript">
+						google.setOnLoadCallback(drawCircle_content);
+
+function drawCircle_content() {
+    var data = new google.visualization.arrayToDataTable([
+        ['language', 'hour'],
+		<?php foreach($graph_data_contents as $graph_data){
+								?>
+		['<?php echo $graph_data['study_content'] ?>', <?php echo $graph_data['study_hour'] ?>],
+		<?php }; ?>
+    ]);
+
+    var formatter = new google.visualization.NumberFormat({ pattern: '#,###.0' + '時間' });
+    formatter.format(data, 1);
+
+    var options = {
+        pieHole: 0.5,
+        legend: 'none',
+        colors: [<?php foreach($graph_data_contents as $graph_data){
+								?>
+		'#<?php echo $graph_data['color'] ?>',<?php }; ?>],
+        width: '100%',
+        height: '254',
+        chartArea: { width: '100%', height: '100%', top: 0 },
+    };
+    var chart_contents = new google.visualization.PieChart(document.getElementById('chart_contents'));
+    chart_contents.draw(data, options);
+};
+window.onresize = function () {
+    drawChart();
+    drawCircle_language();
+    drawCircle_content();
+};
+</script>
 						<div>
 							<?php foreach($study_contents as $study_content){
 								?>
-							<section class="study_items"><span class="circle" id="i_color<?php  print($post1['color']) ?>"></span><?= $study_content['study_content']?></section>
+							<section class="study_items"><span class="circle" id="i_color<?php  print($study_content['color']) ?>"></span><?= $study_content['study_content']?></section>
 							<?php }; ?>
 						</div>
 					</div>
@@ -156,7 +252,7 @@ $all_study_time = $stmt->fetch(PDO::FETCH_COLUMN) ?: 0;
 					<?php foreach($study_contents as $study_content){
 						?>
 						<label class="modal_study_contents_check" name="checked" value="グレー"><input type="checkbox" class="Checkbox"
-						id="c_box<?php  print($study_content['id']) ?>" onclick="chebg('c_box<?php  print($study_content['id']) ?>')"><span
+						id="c_box<?php  print($study_content['id']) ?>"  valueonclick="chebg('c_box<?php  print($study_content['id']) ?>')"><span
 						class="check_content Checkbox-fontas"><?php print_r($study_content["study_content"])?></span></label>
 						
 						<?php }; ?>
