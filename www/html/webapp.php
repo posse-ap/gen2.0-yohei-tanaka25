@@ -23,6 +23,13 @@ $stmt = $pdo->query(
 );
 $month_study_time = $stmt->fetch(PDO::FETCH_COLUMN) ?: 0;
 
+$stmt = $pdo->query("SELECT*FROM study_data WHERE DATE_FORMAT(study_date, '%Y%m') = DATE_FORMAT(now(), '%Y%m') "
+);
+$chart_graph_data = $stmt->fetchAll();
+
+// // print_r($chart_graph_data);
+
+
 $stmt = $pdo->query(
 	"SELECT SUM(study_hour) 
     FROM study_data;"
@@ -40,14 +47,12 @@ $stmt = $pdo->query(
 	INNER JOIN study_languages ON study_languages.id = study_data.study_language_id;"
 );
 $graph_data_languages  = $stmt->fetchAll();
-// print_r($graph_data_languages);
 
 $stmt = $pdo->query(
 	"SELECT *FROM study_data
 	INNER JOIN study_contents ON study_contents.id = study_data.study_content_id;"
 );
 $graph_data_contents  = $stmt->fetchAll();
-// print_r($graph_data_contents);
 
 ?>
 
@@ -111,6 +116,54 @@ $graph_data_contents  = $stmt->fetchAll();
 				<!-- <img src="./image/graph1.png" alt="棒グラフ" class="hour_graph"> -->
 				<div class="hour_graph_whole">
 					<div id="chart_div" class="hour_graph"></div>
+					<script type="text/javascript">
+						google.load('visualization', '1', { 'packages': ['corechart'] });
+
+// グラフを描画する為のコールバック関数を指定
+google.setOnLoadCallback(drawChart);
+
+// グラフの描画   
+function drawChart() {
+    // 配列からデータの生成
+    var data = google.visualization.arrayToDataTable([
+        ['day', 'hour', { role: 'style' }],
+		<?php foreach($chart_graph_data as $graph_data){
+			$date = $graph_data['study_date'];
+			$date_day = date('j', strtotime($date));	
+					?>
+		[<?php echo $date_day ?>, <?php echo $graph_data['study_hour'] ?>, 'color: #76A7FA'],
+		<?php }; ?>
+    ]);
+
+    // オプションの設定
+    var options = {
+        legend: { position: 'none' },
+        width: "100%",
+        height: '400',
+        bar: { groupWidth: "60%" },
+        //x軸
+        hAxis: {
+            gridlines: { color: 'none' },
+            ticks: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30],
+            titleTextStyle: { color: '#137DC4' }
+        },
+        //y軸
+        vAxis: {
+            title: '', format: "#.#h",
+            minValue: 0,
+            gridlines: { color: 'none' },
+            baselineColor: 'block',
+            textPosition: 'out',
+            ticks: [2, 4, 6, 8]
+        },
+    };
+    // 指定されたIDの要素に棒グラフを作成
+    var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+    // グラフの描画
+    chart.draw(data, options);
+};
+
+					</script>
 				</div>
 			</div>
 			
@@ -157,12 +210,8 @@ function drawCircle_language() {
 
     var chart_languages = new google.visualization.PieChart(document.getElementById('chart_languages'));
     chart_languages.draw(data2, options2);
-    
 };
-window.onresize = function () {
-    drawCircle_language();
 
-};
 </script>
 						<!-- 言語の詳細 -->
 						<div class="study_languages">
@@ -206,11 +255,7 @@ function drawCircle_content() {
     var chart_contents = new google.visualization.PieChart(document.getElementById('chart_contents'));
     chart_contents.draw(data, options);
 };
-window.onresize = function () {
-    drawChart();
-    drawCircle_language();
-    drawCircle_content();
-};
+
 </script>
 						<div>
 							<?php foreach($study_contents as $study_content){

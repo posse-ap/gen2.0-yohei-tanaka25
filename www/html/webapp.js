@@ -120,77 +120,11 @@ closeBtn.addEventListener('click', function () {
 // name:visualization(可視化),version:バージョン(1),packages:パッケージ(corechart)
 google.load('visualization', '1', { 'packages': ['corechart'] });
 
-// グラフを描画する為のコールバック関数を指定
-google.setOnLoadCallback(drawChart);
+//グラフを描画する為のコールバック関数を指定
 
-// グラフの描画   
-function drawChart() {
-    // 配列からデータの生成
-    var data = google.visualization.arrayToDataTable([
-        ['day', 'hour', { role: 'style' }],
-        [1, 3, 'color: #76A7FA'],
-        [2, 4, 'color: #76A7FA'],
-        [3, 5, 'color: #76A7FA'],
-        [4, 3, 'color: #76A7FA'],
-        [5, 2, 'color: #76A7FA'],
-        [6, 1, 'color: #76A7FA'],
-        [7, 0, 'color: #76A7FA'],
-        [8, 2, 'color: #76A7FA'],
-        [9, 2, 'color: #76A7FA'],
-        [10, 8, 'color: #76A7FA'],
-        [11, 3, 'color: #76A7FA'],
-        [12, 2, 'color: #76A7FA'],
-        [13, 2, 'color: #76A7FA'],
-        [14, 1, 'color: #76A7FA'],
-        [15, 5, 'color: #76A7FA'],
-        [16, 0, 'color: #76A7FA'],
-        [17, 0, 'color: #76A7FA'],
-        [18, 0, 'color: #76A7FA'],
-        [19, 0, 'color: #76A7FA'],
-        [20, 0, 'color: #76A7FA'],
-        [21, 0, 'color: #76A7FA'],
-        [22, 0, 'color: #76A7FA'],
-        [23, 0, 'color: #76A7FA'],
-        [24, 0, 'color: #76A7FA'],
-        [25, 0, 'color: #76A7FA'],
-        [26, 0, 'color: #76A7FA'],
-        [27, 0, 'color: #76A7FA'],
-        [28, 0, 'color: #76A7FA'],
-        [29, 0, 'color: #76A7FA'],
-        [30, 0, 'color: #76A7FA']
-    ]);
 
-    // オプションの設定
-    var options = {
-        legend: { position: 'none' },
-        width: "100%",
-        height: '400',
-        bar: { groupWidth: "60%" },
-        //x軸
-        hAxis: {
-            gridlines: { color: 'none' },
-            ticks: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30],
-            titleTextStyle: { color: '#137DC4' }
-        },
-        //y軸
-        vAxis: {
-            title: '', format: "#.#h",
-            minValue: 0,
-            gridlines: { color: 'none' },
-            baselineColor: 'block',
-            textPosition: 'out',
-            ticks: [2, 4, 6, 8]
-        },
-    };
-    // 指定されたIDの要素に棒グラフを作成
-    var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-    // グラフの描画
-    chart.draw(data, options);
+window.onresize = function () {
+    drawChart();
+    drawCircle_language();
+    drawCircle_content();
 };
-
-// グラフの大きさを動的に変更
-// window.onresize = function () {
-//     drawChart();
-//     drawCircle_language();
-//     drawCircle_content();
-// };
