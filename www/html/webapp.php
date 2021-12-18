@@ -1,6 +1,7 @@
 
 <?php
 require("./dbconnect.php");
+require("./graph.php");
 
 $stmt = $pdo->query("SELECT * FROM study_languages ");
 $study_languages = $stmt->fetchAll();
@@ -8,51 +9,17 @@ $study_languages = $stmt->fetchAll();
 $stmt = $pdo->query("SELECT * FROM study_contents ");
 $study_contents = $stmt->fetchAll();
 
-$stmt = $pdo->query(
-    "SELECT study_hour
-    FROM study_data
-    WHERE DATE(study_date) = DATE(now()) 
-    ORDER BY study_date;"
+$stmt = $pdo->query( "SELECT study_hour FROM study_data WHERE DATE(study_date) = DATE(now()) ORDER BY study_date;"
 );
 $today_study_time = $stmt->fetch(PDO::FETCH_COLUMN) ?: 0;
 
-$stmt = $pdo->query(
-    "SELECT SUM(study_hour) 
-    FROM study_data
-    WHERE DATE_FORMAT(study_date, '%Y%m') = DATE_FORMAT(now(), '%Y%m') "
+$stmt = $pdo->query("SELECT SUM(study_hour) FROM study_data WHERE DATE_FORMAT(study_date, '%Y%m') = DATE_FORMAT(now(), '%Y%m') "
 );
 $month_study_time = $stmt->fetch(PDO::FETCH_COLUMN) ?: 0;
 
-$stmt = $pdo->query("SELECT*FROM study_data WHERE DATE_FORMAT(study_date, '%Y%m') = DATE_FORMAT(now(), '%Y%m') "
-);
-$chart_graph_data = $stmt->fetchAll();
-
-// // print_r($chart_graph_data);
-
-
-$stmt = $pdo->query(
-	"SELECT SUM(study_hour) 
-    FROM study_data;"
+$stmt = $pdo->query("SELECT SUM(study_hour)  FROM study_data;"
 );
 $all_study_time = $stmt->fetch(PDO::FETCH_COLUMN) ?: 0;
-
-$stmt = $pdo->query(
-	"SELECT *FROM study_data;"
-);
-$graph_data = $stmt->fetchAll();
-// print_r($graph_data);
-
-$stmt = $pdo->query(
-	"SELECT *FROM study_data
-	INNER JOIN study_languages ON study_languages.id = study_data.study_language_id;"
-);
-$graph_data_languages  = $stmt->fetchAll();
-
-$stmt = $pdo->query(
-	"SELECT *FROM study_data
-	INNER JOIN study_contents ON study_contents.id = study_data.study_content_id;"
-);
-$graph_data_contents  = $stmt->fetchAll();
 
 ?>
 
@@ -73,7 +40,6 @@ $graph_data_contents  = $stmt->fetchAll();
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	</head>
 	
-			
 <body>
 	<!-- ヘッダー -->
 	<header>
