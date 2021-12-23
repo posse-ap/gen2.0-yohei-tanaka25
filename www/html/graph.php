@@ -11,9 +11,11 @@ $stmt = $pdo->query(
 $graph_data = $stmt->fetchAll();
 
 $stmt = $pdo->query(
-	"SELECT *FROM study_data INNER JOIN study_languages ON study_languages.id = study_data.study_language_id;"
+	"SELECT *FROM study_data  INNER JOIN study_languages ON study_languages.id = study_data.study_language_id;"
 );
 $graph_data_languages  = $stmt->fetchAll();
+
+
 
 $stmt = $pdo->query(
 	"SELECT *FROM study_data INNER JOIN study_contents ON study_contents.id = study_data.study_content_id;"

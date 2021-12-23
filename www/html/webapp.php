@@ -9,7 +9,7 @@ $study_languages = $stmt->fetchAll();
 $stmt = $pdo->query("SELECT * FROM study_contents ");
 $study_contents = $stmt->fetchAll();
 
-$stmt = $pdo->query( "SELECT study_hour FROM study_data WHERE DATE(study_date) = DATE(now()) ORDER BY study_date;"
+$stmt = $pdo->query( "SELECT SUM(study_hour)FROM study_data WHERE DATE(study_date) = DATE(now()) ORDER BY study_date;"
 );
 $today_study_time = $stmt->fetch(PDO::FETCH_COLUMN) ?: 0;
 
@@ -20,6 +20,23 @@ $month_study_time = $stmt->fetch(PDO::FETCH_COLUMN) ?: 0;
 $stmt = $pdo->query("SELECT SUM(study_hour)  FROM study_data;"
 );
 $all_study_time = $stmt->fetch(PDO::FETCH_COLUMN) ?: 0;
+
+$stmt = $pdo->prepare("INSERT INTO study_data (study_date, study_language_id, study_content_id, study_hour) VALUES (:study_date, :study_language_id, :study_content_id, :study_hour)"
+);
+
+$study_date = '2021-12-22';
+$study_language_id = 5;
+$study_content_id = 0;
+$study_hour = 4;
+
+$stmt->bindValue('study_date', $study_date, PDO::PARAM_STR);
+$stmt->bindValue('study_language_id', $study_language_id, PDO::PARAM_INT);
+$stmt->bindValue('study_content_id', $study_content_id, PDO::PARAM_INT);
+$stmt->bindValue('study_hour', $study_hour, PDO::PARAM_INT);
+$stmt->execute();
+
+
+
 
 ?>
 
@@ -154,7 +171,7 @@ function drawCircle_language() {
         ['language', 'hour'],
 		<?php foreach($graph_data_languages as $graph_data){
 								?>
-		['<?php echo $graph_data['study_language'] ?>', <?php echo $graph_data['study_hour'] ?>],
+		['<?php echo $graph_data['study_language'] ?>', <?php echo $graph_data['study_hour']?>],
 		<?php }; ?>
     ]);
     
@@ -199,7 +216,7 @@ function drawCircle_language() {
 function drawCircle_content() {
     var data = new google.visualization.arrayToDataTable([
         ['language', 'hour'],
-		<?php foreach($graph_data_contents as $graph_data){
+		<?php foreach($graph_data_contents as $graph_data ){
 								?>
 		['<?php echo $graph_data['study_content'] ?>', <?php echo $graph_data['study_hour'] ?>],
 		<?php }; ?>
@@ -262,8 +279,8 @@ function drawCircle_content() {
 					<form class="modal_study_contents_all" name="study_contents">
 					<?php foreach($study_contents as $study_content){
 						?>
-						<label class="modal_study_contents_check" name="checked" value="グレー"><input type="checkbox" class="Checkbox"
-						id="c_box<?php  print($study_content['id']) ?>"  valueonclick="chebg('c_box<?php  print($study_content['id']) ?>')"><span
+						<label class="modal_study_contents_check" name="checked" value="グレー"><input type="checkbox" class="Checkbox" 
+						id="c_box<?php  print($study_content['id']) ?>"  onclick="chebg('c_box<?php  print($study_content['id'])  ?>')"><span
 						class="check_content Checkbox-fontas"><?php print_r($study_content["study_content"])?></span></label>
 						
 						<?php }; ?>
@@ -275,8 +292,8 @@ function drawCircle_content() {
 					<form class="modal_study_languages_all" name="study_languages">
 					<?php foreach($study_languages as $study_language){
 						?>
-						<label class="modal_study_contents_check" name="checked" value="グレー"><input type="checkbox" class="Checkbox"
-						id="c_box<?php  print($study_language['id']) ?>" onclick="chebg('c_box<?php  print($study_language['id']) ?>')"><span
+						<label class="modal_study_contents_check" name="checked" value="グレー"><input type="checkbox" class="Checkbox" 
+						id="c_box_lang<?php  print($study_language['id']) ?>" onclick="chebg('c_box_lang<?php  print($study_language['id']) ?>')"><span
 						class="check_content Checkbox-fontas"><?php print_r($study_language["study_language"])?></span></label>
 						
 						<?php }; ?>

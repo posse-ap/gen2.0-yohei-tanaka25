@@ -39,6 +39,7 @@ study_hour INT NOT NULL
 INSERT INTO study_data (study_date, study_language_id, study_content_id, study_hour) VALUES
 ('2021-12-3', 3, 0, 4),
 ('2021-12-8', 2, 0, 2),
+('2021-12-9', 4, 0, 6),
 ('2021-12-12', 0, 1, 4),
 ('2021-12-15', 0, 2, 1);
 

@@ -34,8 +34,15 @@ function chebg(chkID){
     var  Myid=document.getElementById(chkID);
     if(Myid.checked){
     Myid.parentNode.style.backgroundColor = '#C6E5FF';
-}else{Myid.parentNode.style.backgroundColor = '#f4f5f9';}
-    };
+    }else{Myid.parentNode.style.backgroundColor = '#f4f5f9';}
+};
+
+function chebg_lang(chkID){
+    var  Myid=document.getElementById(chkID);
+    if(Myid.checked){
+    Myid.parentNode.style.backgroundColor = '#C6E5FF';
+    }else{Myid.parentNode.style.backgroundColor = '#f4f5f9';}
+};
 
 var modal_main = document.getElementById('modal_main');//モーダルのメイン部分
 var load = document.getElementById('load');//ロード
