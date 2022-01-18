@@ -1,0 +1,290 @@
+.header{
+    background: #000000;
+    text-align: center;
+    color: #fff;
+    display: block;
+    padding: 1.5vw 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+
+.header_top{
+    text-align: center;
+    font-size: 2.5vw;
+    line-height: 2.188vw;
+    padding-bottom: 0.5vw;
+}
+
+.header_top > img{
+    padding-bottom: 3vh;
+}
+.header_bottom{
+    text-align: center;
+    font-size: 1.042vw;
+    line-height: 1.459vw;
+    font-weight: bold;
+}
+
+.header_bottom > a {
+    color: #fff;
+    text-decoration:none;
+	border-bottom:2px dotted #fff;
+}
+
+.album_info{
+    background: #d91217 url(./image/Background-Desktop.png) no-repeat scroll center top / cover;
+    min-height: 100vh;
+    padding-top: 1vw;
+    padding-bottom: 10vh;
+}
+
+.album_top{
+    width: auto;
+    margin: 0vw auto 1.2vw;
+    font-size: 3vw;
+    line-height: 3.6vw;
+    text-align: center;
+    text-transform: uppercase;
+    color: #000;
+    font-family: 'Steelfish', sans-serif;
+    font-weight: bold;
+}
+
+.album_bottom{
+    width: auto;
+    margin: 0vw auto 5vw;
+    font-size: 3vw;
+    text-align: center;
+    text-transform: uppercase;
+    color: #000;
+    font-family: 'Steelfish', sans-serif;
+    font-weight: bold;
+}
+
+.card {
+    width: 30%; /* 任意の横幅を指定 */
+    position: relative;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+/* 擬似要素とpadding-topでカードの高さを指定 */
+.card::before {
+    content: "";
+    display: block;
+    padding-top: 110%;
+}
+
+/* カード内の画像 */
+.card img {
+    width: 100%;
+}
+
+  /* カード裏面・表面の共通スタイル */
+.card .back,
+.card .front {
+    transition: all 0.6s;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    backface-visibility: hidden;
+}
+
+/* カード表面のスタイル */
+.card .front {
+    transform: rotateY(-180deg);
+}
+
+  /* ホバー時のカード裏面 */
+.card:hover .back {
+transform: rotateY(180deg);
+}
+  /* ホバー時のカード表面 */
+.card:hover .front {
+    transform: rotateY(0);
+}
+
+.pre_order{
+    margin:0 auto;
+    text-align: center;
+}
+
+.pre_order > a {
+    background-color: #fff;
+    width: 18vw;
+    cursor: pointer;
+    padding: 0.5vw 5vw 0.5vw;
+    text-decoration:none;
+    font-family: 'Steelfish', sans-serif;
+    color: #272727;
+    transition: 1.0s;
+    font-size: 1.5rem;
+}
+
+.pre_order > a:hover{
+    opacity: 0.5;
+    color: tomato;
+}
+
+.album_info_scroll{
+    font-family: 'Steelfish', sans-serif;
+    margin: 2vh auto 0 auto;
+    text-align: center;
+    font-size: 1.5rem;
+
+}
+.album_info_scroll i::before{
+    animation: blinker 2s linear infinite;
+    position: relative;
+    font-size: 180%;
+    margin-top: 1.5vw;
+    display: inline-block;
+    margin-right: 1vw;
+}
+
+@keyframes blinker{
+    0%,100% {
+        opacity: 1;
+    }
+    
+    50% {
+        opacity: 0;
+    }
+}
+
+/* ここからvideo section */
+.video_info{
+    background: #d91217 url(./image/splatter-bg-desktop-b.png) no-repeat scroll center top / cover;
+    padding-bottom: 18vh;
+    min-height: 100vh;
+    padding-top: 8vw;
+}
+
+.video_top{
+    width: auto;
+    margin: 0vw auto 1.5vw;
+    font-size: 2.4vw;
+    line-height: 3.6vw;
+    text-align: center;
+    text-transform: uppercase;
+    color: #ff1c26;
+    font-family: 'Steelfish', sans-serif;
+    font-weight: bold;
+}
+
+.youtube {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 4vh;
+    position: relative;
+}
+
+.play_icon{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+}
+
+.play_icon:hover{
+    opacity: 0.5;
+    transition: 0.7s;
+}
+
+
+/* スライドするコンテンツ */
+#jsnap {
+    margin-top: 2vh;
+    width:100%;  
+    display:flex;   
+    /* タッチ操作などでスクロールできないようにする。   */
+    overflow-x:hidden;   
+}  
+#jsnap > div {
+    height:100%;  
+    width:100%;  
+    flex:none;  
+    display:flex;  
+    align-items:center;  
+    justify-content:center;  
+} 
+#jsnap > div > img {
+    width:50%;  
+    padding-left:0;  
+    }
+/* buttonを左右に振り分け*/
+#modoru{
+    margin-top: 3vh;
+    float:left;   
+    background-color: transparent;
+}      
+#susumu{
+    margin-top: 3vh;
+    float:right;  
+    background-color: transparent;
+}      
+    /* ボタンエリアの幅、センタリングなど */
+#buttons {
+    display:block;  
+    margin:0 auto;  
+    width:50%;
+}
+
+.arrow{
+    color: #fff;
+    font-size: 2rem;
+    margin-top: 3vh;
+    cursor: pointer;
+}
+
+.swipe_info{
+    color: #fff;
+    text-align: center;
+    font-family: 'Steelfish', sans-serif;
+    padding-top: 10vh;
+}
+
+.enter_button{
+    color: #ff1c26;
+    background-color: #000;
+    padding:3%;
+    text-align: center;
+}
+
+.enter_button > a{
+    color: #ff1c26;
+    text-decoration: none;
+    font-family: 'Steelfish', sans-serif;
+    font-size: 2rem;
+}
+
+.footer{
+    background-color: #ff1c26;
+}
+
+.footer_top{
+    color: #fff;
+    text-align: center;
+    font-size: 1rem;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding-top: 4vh;
+}
+.footer_bottom{
+    display: flex;
+}
+
+.footer_bottom > a{
+    text-decoration: none;
+    color: #fff;
+    margin: 0 auto;
+    font-size: 1rem;
+    padding-bottom: 3vh;
+    padding-top: 2vh;
+}
+.footer_bottom > a:hover{
+    color: #000;
+    transition: 0.3s;
+}

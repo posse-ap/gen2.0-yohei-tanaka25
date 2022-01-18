@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="Ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="edsheera.css">
+    <link href="http://fonts.cdnfonts.com/css/steelfish" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <title>Ed sheeran</title>
+</head>
+
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="header_top">
+            <img src="./image/symbols-white.png" alt="header_img_">
+            Tour
+        </div>
+        <div class="header_bottom">
+            Tickets on sale now,
+            <a href="https://www.edsheeran.com/tour">see all tour dates >></a>
+        </div>
+    </header>
+    <!-- ヘッダーここまで -->
+
+    <!-- メイン -->
+    <main>
+        <!-- ニューアルバムセクション -->
+        <div class="album_info">
+            <div class="album_top">THE NEW ALBUM</div>
+            <div class="card">
+                <div class="back">
+                    <img src="./image/album-packshot.png" alt="" />
+                </div>
+                <div class="front">
+                    <img src="./image/reverse.png" alt="" />
+                </div>
+            </div>
+            <div class="album_bottom">OUT NOW</div>
+            <div class="pre_order">
+                <a href="https://es.lnk.to/Equals">BUY / LISTEN</a>
+            </div>
+            <div class="album_info_scroll">
+                <i class="far fa-arrow-alt-circle-down"></i>
+                SCROLL TO SEE THE "MERRY CHRISTMAS" VIDEO
+            </div>
+        </div>
+
+        <!-- ビデオセクション -->
+        <div class="video_info">
+            <div class="video_top">MERRY CHRISTMAS</div>
+            <div class="pre_order">
+                <a href="https://es.lnk.to/Equals">BUY / LISTEN</a>
+            </div>
+            <div class="youtube">
+                <img src="./image/mxmas.png" alt="video-image" data-video-id="Q_yuO8UNGmY">
+                <img class="play_icon" src="./image/play-icon.png" alt="play-icon">
+            </div>
+            <!-- 6つのコンテンツ（クリック時にスライドで切り替え） -->
+            <div id="jsnap">
+                <div><img src="./image/Splash_Banner-new.png" alt=""></div>
+                <div><img src="./image/2-BLACK_STANDARD_LP-everything.png" alt=""></div>
+                <div><img src="./image/5-SOLID_RED_LP-everything.png" alt=""></div>
+                <div><img src="./image/7-DELUXE_BOOK.png" alt=""></div>
+                <div><img src="./image/8-CASSETTE-v2-all.png" alt=""></div>
+                <div><img src="./image/1-STANDARD_CD-layout.png" alt=""></div>
+            </div>
+            <!-- ボタンエリア -->
+            <div id="buttons">
+                <button id="modoru" type="button" onclick="modoru()">
+                    <span class="arrow"><i class="far fa-arrow-alt-circle-left"></i></span>
+                </button>
+                <button id="susumu" type="button" onclick="susumu()">
+                    <span class="arrow"><i class="far fa-arrow-alt-circle-right"></i></span>
+                </button>
+            </div>
+
+            <div class="swipe_info">SWIPE TO SEE MORE</div>
+
+        </div>
+        <div class="enter_button">
+            <a href="/?frontpage=true" data-track="enter-site">ENTER OFFICIAL WEBSITE</a>
+        </div>
+        <!-- フッター -->
+        <div class="footer">
+            <div class="footer_top">2021 Warner Music UK Limited.</div>
+            <div class="footer_bottom">
+                <a href="https://www.wminewmedia.com/privacy/">Privacy Policy - </a>
+                <a href="https://wminewmedia.com/terms-of-use/">Terms of Use - </a>
+                <a
+                    href="https://www.wminewmedia.com/cookies-policy/?ot=aa9ea645-8403-4e84-ae4a-6802be8412b7&url=www.edsheeran.com">Cookies
+                    Policy - </a>
+                <a href="">Cookies Settings</a>
+            </div>
+        </div>
+
+
+
+        <div id="loop"></div>
+    </main>
+    <script src="edsheeran.js"></script>
+</body>
+
+</html>
