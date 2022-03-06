@@ -130,8 +130,8 @@ google.load('visualization', '1', { 'packages': ['corechart'] });
 //グラフを描画する為のコールバック関数を指定
 
 
-window.onresize = function () {
-    drawChart();
-    drawCircle_language();
-    drawCircle_content();
-};
+// window.onresize = function () {
+//     drawChart();
+//     drawCircle_language();
+//     drawCircle_content();
+// };

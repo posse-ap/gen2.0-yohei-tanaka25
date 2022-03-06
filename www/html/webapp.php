@@ -21,19 +21,6 @@ $stmt = $pdo->query("SELECT SUM(study_hour)  FROM study_data;"
 );
 $all_study_time = $stmt->fetch(PDO::FETCH_COLUMN) ?: 0;
 
-$stmt = $pdo->prepare("INSERT INTO study_data (study_date, study_language_id, study_content_id, study_hour) VALUES (:study_date, :study_language_id, :study_content_id, :study_hour)"
-);
-
-$study_date = '2021-12-22';
-$study_language_id = 5;
-$study_content_id = 0;
-$study_hour = 4;
-
-$stmt->bindValue('study_date', $study_date, PDO::PARAM_STR);
-$stmt->bindValue('study_language_id', $study_language_id, PDO::PARAM_INT);
-$stmt->bindValue('study_content_id', $study_content_id, PDO::PARAM_INT);
-$stmt->bindValue('study_hour', $study_hour, PDO::PARAM_INT);
-$stmt->execute();
 
 
 
@@ -110,12 +97,13 @@ function drawChart() {
     // 配列からデータの生成
     var data = google.visualization.arrayToDataTable([
         ['day', 'hour', { role: 'style' }],
-		<?php foreach($chart_graph_data as $graph_data){
-			$date = $graph_data['study_date'];
-			$date_day = date('j', strtotime($date));	
-					?>
-		[<?php echo $date_day ?>, <?php echo $graph_data['study_hour'] ?>, 'color: #76A7FA'],
-		<?php }; ?>
+		<?php foreach($graph_data as $graph_data_each){ 
+			$date = $graph_data_each['study_date'];
+			$date_day = date('j', strtotime($date)); 
+			?>
+	[<?php echo $date_day?>, <?php echo $graph_data_each['study_hour'] ?>, 'color: #76A7FA'],
+	<?php }; ?>
+	
     ]);
 
     // オプションの設定
